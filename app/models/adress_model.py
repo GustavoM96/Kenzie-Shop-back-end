@@ -7,10 +7,11 @@ from sqlalchemy.orm import relationship, backref
 from sqlalchemy.sql.schema import ForeignKey
 from sqlalchemy import Column, String, Integer, Date
 
+
 @dataclass
 class AddressModel(db.Model):
     id: int
-    name:str
+    name: str
     number: int
     complement: str
     zipcode: str
