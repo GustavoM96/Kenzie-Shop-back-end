@@ -1,1 +1,1 @@
-from .customer_view import CustomerResource
+from .customer_view import CustomerResource, CustomerIdResource
