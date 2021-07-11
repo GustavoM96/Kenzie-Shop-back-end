@@ -30,10 +30,10 @@ class EntityServices:
 
     @staticmethod
     def update_entity_by_id(entity: Model, entity_id: int, data: dict) -> Model:
-        found_entity = model.query.get(entity_id)
+        updated_entity = model.query.get(entity_id)
 
         for key, value in data.items():
-            setattr(found_entity, key, value)
+            setattr(updated_entity, key, value)
 
         add_commit(updated_entity)
 
