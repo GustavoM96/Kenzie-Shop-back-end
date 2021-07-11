@@ -30,16 +30,18 @@ class EntityServices:
 
     @staticmethod
     def update_entity(entity: Model, data: dict) -> Model:
+        update_entity = entity
 
         for key, value in data.items():
-            setattr(entity, key, value)
+            setattr(update_entity, key, value)
 
-        add_commit(entity)
+        add_commit(update_entity)
 
         return entity
 
     @staticmethod
     def delete_entity(entity: Model) -> None:
+        deleted_entity = entity
 
         delete_commit(entity)
 
