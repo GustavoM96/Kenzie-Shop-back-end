@@ -29,20 +29,20 @@ class EntityServices:
         return entity
 
     @staticmethod
-    def update_entity_by_id(entity: Model, entity_id: int, data: dict) -> Model:
-        updated_entity = model.query.get(entity_id)
+    def update_entity(entity: Model, data: dict) -> Model:
+        update_entity = entity
 
         for key, value in data.items():
-            setattr(updated_entity, key, value)
+            setattr(update_entity, key, value)
 
-        add_commit(updated_entity)
+        add_commit(update_entity)
 
-        return updated_entity
+        return entity
 
     @staticmethod
-    def delete_entity_by_id(entity: Model) -> None:
-        found_entity = model.query.get(product_id)
+    def delete_entity(entity: Model) -> None:
+        deleted_entity = entity
 
-        delete_commit(found_entity)
+        delete_commit(entity)
 
         return None
