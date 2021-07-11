@@ -3,6 +3,7 @@ from app.config.database import db
 from sqlalchemy import Column, String, Integer, Date
 from dataclasses import dataclass
 from datetime import datetime
+from sqlalchemy.orm import backref, relationship
 
 
 @dataclass
