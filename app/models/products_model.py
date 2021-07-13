@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Integer, Decimal, Date, Text
+from sqlalchemy import Column, String, Integer, DECIMAL, Date, Text
 from app.config.database import db
 from dataclasses import dataclass
 from datetime import datetime
@@ -22,7 +22,7 @@ class ProductsModel(db.Model):
 
     name = Column(String(126), nullable=True, unique=True)
     description = Column(Text, nullable=True)
-    current_price = Column(Decimal, nullable=True)
+    current_price = Column(DECIMAL, nullable=True)
     discount = Column(Integer, default=0)
     amount_products = Column(Integer, nullable=True)
     created_at = Column(Date, nullable=True, default=datetime.now())
