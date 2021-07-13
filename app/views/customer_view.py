@@ -3,6 +3,7 @@ from http import HTTPStatus
 from app.services.entity_services import EntityServices
 from app.models.customer_model import CustomerModel
 from flask import jsonify, make_response
+from app.services.customer_service import CustomerServices
 
 
 class CustomerResource(Resource):
@@ -18,8 +19,7 @@ class CustomerResource(Resource):
 
         args = parser.parse_args()
 
-        """ modelo de criação de entidade"""
-        created_user = EntityServices.create_entity(CustomerModel, args)
+        created_user = CustomerServices.create_customer(args)
 
         return make_response(jsonify(created_user), HTTPStatus.CREATED)
 
