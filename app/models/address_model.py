@@ -33,4 +33,4 @@ class AddressModel(db.Model):
     updated_at = Column(Date, default=datetime.now())
     customer_id = Column(Integer, ForeignKey("customers.id"), nullable=True)
 
-    customers = relationship("CustomersModel", backref=backref("address"))
+    customers = relationship("CustomerModel", backref=backref("address"))
