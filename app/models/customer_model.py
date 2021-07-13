@@ -1,9 +1,10 @@
 from datetime import datetime
 from app.config.database import db
 from sqlalchemy import Column, String, Integer, Date
+from sqlalchemy.schema import ForeignKey
 from dataclasses import dataclass
-from datetime import datetime
 from sqlalchemy.orm import backref, relationship
+from werkzeug.security import check_password_hash, generate_password_hash
 
 
 @dataclass
@@ -23,7 +24,7 @@ class CustomerModel(db.Model):
     last_name = Column(String(126), nullable=True)
     email = Column(String(126), nullable=True)
     password_hash = Column(String(126), nullable=True)
-    cart_id = Column(Integer)
+    cart_id = Column(Integer, ForeignKey("carts.id"), unique=True, nullable=False)
     create_at = Column(Date, default=datetime.now())
     update_at = Column(Date, default=datetime.now())
 
