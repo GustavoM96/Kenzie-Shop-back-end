@@ -23,9 +23,13 @@ class CartProductModel(db.Model):
     total_price = Column(DECIMAL, nullable=False)
 
     cart_id = Column(Integer, ForeignKey("carts.id"), nullable=False)
-    cart = relationship("CartModel", backref=backref("carts_products"))
 
     product_id = Column(Integer, ForeignKey("products.id"), nullable=False)
-    product = relationship(
-        "ProductModel", backref=backref("carts_products"), uselist=False
-    )
+
+    # TABELAS PIVOS NÃO PODEM TER RELACIONAMENTOS
+    # Esses relacionamentos conflitam com os relacionamentos do cart
+
+    # cart = relationship("CartModel", backref=backref("carts_products"))
+    # product = relationship(
+    #     "ProductModel", backref=backref("carts_products"), uselist=False
+    # )

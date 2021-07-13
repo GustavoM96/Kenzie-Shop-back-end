@@ -1,9 +1,10 @@
 from flask_restful import Resource, reqparse
 from http import HTTPStatus
-from app.models.products_model import ProductsModel
+from app.models.product_model import ProductModel
 from app.services.entity_services import EntityServices
-from flask import jsonify
+from flask import jsonify, make_response
 from datetime import datetime
+
 
 class ProductResource(Resource):
     def post(self):
@@ -11,29 +12,30 @@ class ProductResource(Resource):
 
         parser.add_argument("name", type=str)
         parser.add_argument("description", type=str)
-        parser.add_argument("current_price", type=int)
+        parser.add_argument("current_price", type=float)
         parser.add_argument("discount", type=int, required=True)
         parser.add_argument("amount_products", type=int)
         parser.add_argument("image_url", type=str, required=True)
 
         args = parser.parse_args()
 
-        print(args)
+        created_product = EntityServices.create_entity(ProductModel, args)
 
-        created_product = EntityServices.create_entity(ProductsModel, args)
-
-        return jsonify(created_product), HTTPStatus.CREATED
+        return make_response(jsonify(created_product), HTTPStatus.CREATED)
 
     def get(self):
-        list_product = EntityServices.get_all_entity(ProductsModel)
+        list_product = EntityServices.get_all_entity(ProductModel)
 
-        return jsonify(list_customer), HTTPStatus.OK
+        print("======== lalalalal", type(list_product[0].current_price))
+
+        return make_response(jsonify(list_product), HTTPStatus.OK)
+
 
 class ProductIdResource(Resource):
     def get(self, product_id: int):
-        found_product = EntityServices.get_entity_by_id(ProductsModel, product_id)
+        found_product = EntityServices.get_entity_by_id(ProductModel, product_id)
 
-        return jsonify(found_product), HTTPStatus.OK
+        return make_response(jsonify(found_product), HTTPStatus.OK)
 
     def patch(self, product_id: int):
         parser = reqparse.RequestParser()
@@ -48,8 +50,8 @@ class ProductIdResource(Resource):
 
         args = parser.parse_args()
 
-        found_product = EntityServices.get_entity_by_id(ProductsModel, product_id)
+        found_product = EntityServices.get_entity_by_id(ProductModel, product_id)
 
         updated_product = EntityServices.update_entity(found_product, args)
 
-        return jsonify(updated_product), HTTPStatus.OK
+        return make_response(jsonify(updated_product), HTTPStatus.OK)
