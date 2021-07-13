@@ -1,9 +1,10 @@
 from flask_sqlalchemy.model import Model
 from flask import current_app
+from app.config.database import db
 
 
 def add_commit(model: Model) -> None:
-    session = current_app.db.session
+    session = db.session
 
     session.add(model)
     session.commit()

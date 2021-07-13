@@ -9,8 +9,8 @@ def init_app(app: Flask) -> None:
     db.init_app(app)
 
     from app.models.cart_model import CartModel
-    from app.models.adress_model import AddressModel
+    from app.models.address_model import AddressModel
     from app.models.admin_model import AdminModel
-    from app.models.products_model import ProductModel
+    from app.models.product_model import ProductModel
     from app.models.customer_model import CustomerModel
     from app.models.carts_products_model import CartProductModel
