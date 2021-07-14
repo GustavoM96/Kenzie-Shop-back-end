@@ -9,7 +9,6 @@ class AdminModel(db.Model):
     id: int
     name: str
     email: str
-    password_hash: str
 
     __tablename__ = "admin"
 

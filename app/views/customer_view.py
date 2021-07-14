@@ -4,8 +4,6 @@ from app.services.entity_services import EntityServices
 from app.models.customer_model import CustomerModel
 from flask import jsonify, make_response
 from app.services.customer_service import CustomerServices
-from flask_jwt_extended import jwt_required
-from app.services.auth_admin_service import admin_required
 
 
 class CustomerResource(Resource):
