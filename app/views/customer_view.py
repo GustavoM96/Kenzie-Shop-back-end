@@ -2,7 +2,8 @@ from flask_restful import Resource, reqparse
 from http import HTTPStatus
 from app.services.entity_services import EntityServices
 from app.models.customer_model import CustomerModel
-from flask import jsonify
+from flask import jsonify, make_response
+from app.services.customer_service import CustomerServices
 
 
 class CustomerResource(Resource):
@@ -18,22 +19,21 @@ class CustomerResource(Resource):
 
         args = parser.parse_args()
 
-        """ modelo de criação de entidade"""
-        created_user = EntityServices.create_entity(CustomerModel, args)
+        created_user = CustomerServices.create_customer(args)
 
-        return jsonify(created_user), HTTPStatus.CREATED
+        return make_response(jsonify(created_user), HTTPStatus.CREATED)
 
     def get(self):
         list_customer = EntityServices.get_all_entity(CustomerModel)
 
-        return jsonify(list_customer), HTTPStatus.OK
+        return make_response(jsonify(list_customer), HTTPStatus.OK)
 
 
 class CustomerIdResource(Resource):
     def get(self, customer_id: int):
         found_customer = EntityServices.get_entity_by_id(CustomerModel, customer_id)
 
-        return jsonify(found_customer), HTTPStatus.OK
+        return make_response(jsonify(found_customer), HTTPStatus.OK)
 
     def patch(self, customer_id: int):
         parser = reqparse.RequestParser()
@@ -47,4 +47,4 @@ class CustomerIdResource(Resource):
 
         updated_customer = EntityServices.update_entity(found_customer, args)
 
-        return jsonify(updated_customer), HTTPStatus.OK
+        return make_response(jsonify(updated_customer), HTTPStatus.OK)
