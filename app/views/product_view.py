@@ -35,8 +35,6 @@ class ProductResource(Resource):
     def get(self):
         list_product = EntityServices.get_all_entity(ProductModel)
 
-        print("======== lalalalal", type(list_product[0].current_price))
-
         return make_response(jsonify(list_product), HTTPStatus.OK)
 
 
