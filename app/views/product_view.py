@@ -2,6 +2,7 @@ from flask_restful import Resource, reqparse
 from http import HTTPStatus
 from app.models.product_model import ProductModel
 from app.services.entity_services import EntityServices
+from app.services.helper import get_now
 from flask import jsonify, make_response
 from datetime import datetime
 
@@ -16,12 +17,20 @@ class ProductResource(Resource):
         parser.add_argument("discount", type=int, required=True)
         parser.add_argument("amount_products", type=int)
         parser.add_argument("image_url", type=str, required=True)
+        parser.add_argument("created_at", type=str, default=get_now())
+        parser.add_argument("updated_at", type=str, default=get_now())
 
         args = parser.parse_args()
 
+        print(args["created_at"])
+        print(type(args["created_at"]))
+
         created_product = EntityServices.create_entity(ProductModel, args)
 
+        print(created_product)
+
         return make_response(jsonify(created_product), HTTPStatus.CREATED)
+        return args
 
     def get(self):
         list_product = EntityServices.get_all_entity(ProductModel)

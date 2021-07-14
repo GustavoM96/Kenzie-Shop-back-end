@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Integer, Float, Date, Text
+from sqlalchemy import Column, String, Integer, Float, Date, Text, TIMESTAMP
 from app.config.database import db
 from dataclasses import dataclass
 from datetime import datetime
@@ -26,6 +26,6 @@ class ProductModel(db.Model):
     current_price = Column(Float, nullable=True)
     discount = Column(Integer, default=0)
     amount_products = Column(Integer, nullable=True)
-    created_at = Column(Date, nullable=True, default=datetime.now())
-    updated_at = Column(Date, nullable=True)
+    created_at = Column(TIMESTAMP, nullable=True, default=datetime.now())
+    updated_at = Column(TIMESTAMP, nullable=True)
     image_url = Column(Text)
