@@ -1,6 +1,6 @@
 from datetime import datetime
 from app.config.database import db
-from sqlalchemy import Column, String, Integer, Date
+from sqlalchemy import Column, String, Integer, TIMESTAMP
 from sqlalchemy.schema import ForeignKey
 from dataclasses import dataclass
 from sqlalchemy.orm import backref, relationship
@@ -25,8 +25,8 @@ class CustomerModel(db.Model):
     email = Column(String(126), nullable=True)
     password_hash = Column(String(126), nullable=True)
     cart_id = Column(Integer, ForeignKey("carts.id"), unique=True, nullable=False)
-    create_at = Column(Date, default=datetime.now())
-    update_at = Column(Date, default=datetime.now())
+    create_at = Column(TIMESTAMP, default=datetime.now())
+    update_at = Column(TIMESTAMP, default=datetime.now())
 
     cart = relationship("CartModel", backref=backref("customer"), uselist=False)
 

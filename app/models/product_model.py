@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Integer, Float, Date, Text, TIMESTAMP
+from sqlalchemy import Column, String, Integer, Float, Text, TIMESTAMP
 from app.config.database import db
 from dataclasses import dataclass
 from datetime import datetime
