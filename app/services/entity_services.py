@@ -21,6 +21,12 @@ class EntityServices:
         return found_entity
 
     @staticmethod
+    def get_entity_by_keys(model: Model, **kargs) -> Model:
+        found_entity = model.query.filter_by(**kargs).first()
+
+        return found_entity
+
+    @staticmethod
     def create_entity(model: Model, data: dict) -> Model:
         entity = model(**data)
 
