@@ -3,6 +3,7 @@ from app.views import CustomerResource, CustomerIdResource
 from app.views import ProductResource, ProductIdResource
 from app.views import AddressIdCustomerResource, AdressIdResource
 from app.views import AuthCustomerResource, AuthAdminResource
+from app.views import AdminResource
 from flask import Flask
 
 
@@ -10,6 +11,8 @@ def init_app(app: Flask) -> None:
     api = Api(app)
 
     api.add_resource(CustomerResource, "/customer", endpoint="customer")
+    api.add_resource(AdminResource, "/admin", endpoint="admin")
+
     api.add_resource(
         CustomerIdResource, "/customer/<int:customer_id>", endpoint="customer_id"
     )
