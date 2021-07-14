@@ -1,9 +1,11 @@
 from flask_sqlalchemy.model import Model
 from flask import current_app
+from app.config.database import db
+from datetime import datetime
 
 
 def add_commit(model: Model) -> None:
-    session = current_app.db.session
+    session = db.session
 
     session.add(model)
     session.commit()
@@ -21,3 +23,13 @@ def delete_commit(model: Model) -> None:
 
     session.delete(model)
     session.commit()
+
+
+def get_now():
+    minute = datetime.now().minute
+    hour = datetime.now().hour
+    day = datetime.now().day
+    month = datetime.now().month
+    year = datetime.now().year
+
+    return datetime(year, month, day, hour, minute)
