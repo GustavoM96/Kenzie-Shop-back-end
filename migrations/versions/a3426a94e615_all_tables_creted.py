@@ -1,8 +1,8 @@
-"""create database
+"""All tables creted
 
-Revision ID: 9806e8c30866
+Revision ID: a3426a94e615
 Revises: 
-Create Date: 2021-07-13 10:45:04.619526
+Create Date: 2021-07-13 22:10:54.857768
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '9806e8c30866'
+revision = 'a3426a94e615'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -36,11 +36,11 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=126), nullable=True),
     sa.Column('description', sa.Text(), nullable=True),
-    sa.Column('current_price', sa.DECIMAL(), nullable=True),
+    sa.Column('current_price', sa.Float(), nullable=True),
     sa.Column('discount', sa.Integer(), nullable=True),
     sa.Column('amount_products', sa.Integer(), nullable=True),
-    sa.Column('created_at', sa.Date(), nullable=True),
-    sa.Column('updated_at', sa.Date(), nullable=True),
+    sa.Column('created_at', sa.TIMESTAMP(), nullable=True),
+    sa.Column('updated_at', sa.TIMESTAMP(), nullable=True),
     sa.Column('image_url', sa.Text(), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('name')
