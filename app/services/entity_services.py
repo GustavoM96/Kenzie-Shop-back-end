@@ -33,7 +33,7 @@ class EntityServices:
         update_entity = entity
 
         for key, value in data.items():
-            if value == None:
+            if value != None:
                 setattr(update_entity, key, value)
 
         add_commit(update_entity)
