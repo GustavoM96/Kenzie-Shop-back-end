@@ -62,3 +62,10 @@ class ProductIdResource(Resource):
         updated_product = EntityServices.update_entity(found_product, args)
 
         return make_response(jsonify(updated_product), HTTPStatus.OK)
+
+    def delete(self, product_id: int):
+        found_product = EntityServices.get_entity_by_id(ProductModel, product_id)
+
+        EntityServices.delete_entity(found_product)
+
+        return "", HTTPStatus.NO_CONTENT

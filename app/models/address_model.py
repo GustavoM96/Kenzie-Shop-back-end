@@ -5,7 +5,7 @@ from dataclasses import dataclass
 
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy.sql.schema import ForeignKey
-from sqlalchemy import Column, String, Integer, Date
+from sqlalchemy import Column, String, Integer, TIMESTAMP
 
 
 @dataclass
@@ -29,8 +29,8 @@ class AddressModel(db.Model):
     zipcode = Column(String(9), nullable=True)
     city = Column(String(50), nullable=True)
     state = Column(String(50), nullable=True)
-    created_at = Column(Date, default=datetime.now())
-    updated_at = Column(Date, default=datetime.now())
+    created_at = Column(TIMESTAMP, default=datetime.now())
+    updated_at = Column(TIMESTAMP, default=datetime.now())
     customer_id = Column(Integer, ForeignKey("customers.id"), nullable=True)
 
     customers = relationship("CustomerModel", backref=backref("address"))
