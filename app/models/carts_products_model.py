@@ -8,7 +8,7 @@ from dataclasses import dataclass
 @dataclass
 class CartProductModel(db.Model):
     id: int
-    quantity_id: int
+    quantity_product: int
     total_price: float
     cart_id: int
     product_id: int
@@ -17,7 +17,7 @@ class CartProductModel(db.Model):
 
     id = Column(Integer, primary_key=True)
 
-    quantity_id = Column(Integer, nullable=False)
+    quantity_product = Column(Integer, nullable=False)
     total_price = Column(Float, nullable=False)
 
     cart_id = Column(Integer, ForeignKey("carts.id"), nullable=False)
