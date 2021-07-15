@@ -23,12 +23,12 @@ class AddressModel(db.Model):
     __tablename__ = "addresses"
 
     id = Column(Integer, primary_key=True)
-    name = Column(String(126), nullable=True)
+    name = Column(String(126), nullable=False)
     number = Column(Integer)
     complement = Column(String(50))
-    zipcode = Column(String(9), nullable=True)
-    city = Column(String(50), nullable=True)
-    state = Column(String(50), nullable=True)
+    zipcode = Column(String(9), nullable=False)
+    city = Column(String(50), nullable=False)
+    state = Column(String(50), nullable=False)
     created_at = Column(TIMESTAMP, default=datetime.now())
     updated_at = Column(TIMESTAMP, default=datetime.now())
     customer_id = Column(Integer, ForeignKey("customers.id"), nullable=True)

@@ -20,10 +20,10 @@ class CustomerModel(db.Model):
 
     id = Column(Integer, primary_key=True)
 
-    name = Column(String(126), nullable=True)
-    last_name = Column(String(126), nullable=True)
-    email = Column(String(126), nullable=True)
-    password_hash = Column(String(126), nullable=True)
+    name = Column(String(126), nullable=False)
+    last_name = Column(String(126), nullable=False)
+    email = Column(String(126), nullable=False)
+    password_hash = Column(String(126), nullable=False)
     cart_id = Column(Integer, ForeignKey("carts.id"), unique=True, nullable=False)
     create_at = Column(TIMESTAMP, default=datetime.now())
     update_at = Column(TIMESTAMP, default=datetime.now())
