@@ -16,15 +16,21 @@ class CartResource(Resource):
 
         customer_cart: CartModel = current_customer.cart
 
-        all_carts_products = EntityServices.get_all_entity(CartProductModel)
+        # all_carts_products = EntityServices.get_all_entity(CartProductModel)
 
-        current_cart_product = [
-            cart_product
-            for cart_product in all_carts_products
-            if cart_product.cart_id == customer_cart.id
-        ]
+        # current_cart_product = [
+        #     cart_product
+        #     for cart_product in all_carts_products
+        #     if cart_product.cart_id == customer_cart.id
+        # ]
 
-        return make_response(jsonify(current_cart_product), HTTPStatus.OK)
+        list_products = EntityServices.get_all_entity_by_keys(
+            CartProductModel, cart_id=customer_cart.id
+        )
+
+        print(list_products)
+
+        return make_response(jsonify(list_products), HTTPStatus.OK)
 
 
 class CartProductResource(Resource):
