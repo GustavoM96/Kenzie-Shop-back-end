@@ -27,8 +27,8 @@ class EntityServices:
         return found_entity
 
     @staticmethod
-    def get_all_entity_by_keys(model: Model, **kargs) -> Model:
-        found_list_entity = model.query.filter_by(**kargs)
+    def get_all_entity_by_keys(model: Model, **kargs) -> list[Model]:
+        found_list_entity = model.query.filter_by(**kargs).all()
 
         return found_list_entity
 
