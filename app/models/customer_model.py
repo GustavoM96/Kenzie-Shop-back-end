@@ -9,6 +9,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 @dataclass
 class CustomerModel(db.Model):
+    id: int
     name: str
     last_name: str
     email: str

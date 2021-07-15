@@ -1,5 +1,6 @@
 from flask_restful import Api
 from app.views import CustomerResource, CustomerIdResource
+from app.views import CartResource, CartProductResource
 from app.views import ProductResource, ProductIdResource
 from app.views import AddressIdCustomerResource, AdressIdResource
 from app.views import AuthCustomerResource, AuthAdminResource
@@ -34,3 +35,13 @@ def init_app(app: Flask) -> None:
         AuthCustomerResource, "/auth/customer", endpoint="authenticate_customer"
     )
     api.add_resource(AuthAdminResource, "/auth/admin", endpoint="authenticate_admin")
+
+    api.add_resource(
+        CartResource, "/customers/<int:customer_id>/cart", endpoint="customer_cart"
+    )
+
+    api.add_resource(
+        CartProductResource,
+        "/customers/<int:customer_id>/cart/<int:product_id>",
+        endpoint="customer_cart_product",
+    )
