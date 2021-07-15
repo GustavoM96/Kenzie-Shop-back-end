@@ -6,9 +6,11 @@ from app.services.helper import get_now
 from flask import jsonify, make_response
 from datetime import datetime
 from sqlalchemy.exc import IntegrityError
+from app.services.auth_admin_service import admin_required
 
 
 class ProductResource(Resource):
+    @admin_required()
     def post(self):
         try:
             parser = reqparse.RequestParser()
@@ -24,16 +26,12 @@ class ProductResource(Resource):
 
             args = parser.parse_args()
 
-           
             created_product = EntityServices.create_entity(ProductModel, args)
-         
 
             return make_response(jsonify(created_product), HTTPStatus.CREATED)
-          
 
         except IntegrityError as _:
             return {"error": {"message": "This product already exists"}}, 422
-
 
     def get(self):
         list_product = EntityServices.get_all_entity(ProductModel)
@@ -47,6 +45,7 @@ class ProductIdResource(Resource):
 
         return make_response(jsonify(found_product), HTTPStatus.OK)
 
+    @admin_required()
     def patch(self, product_id: int):
         try:
             parser = reqparse.RequestParser()
@@ -70,6 +69,7 @@ class ProductIdResource(Resource):
         except IntegrityError as _:
             return {"error": {"message": "This product already exists"}}, 422
 
+    @admin_required()
     def delete(self, product_id: int):
         found_product = EntityServices.get_entity_by_id(ProductModel, product_id)
 

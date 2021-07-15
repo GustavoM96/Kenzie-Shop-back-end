@@ -7,9 +7,11 @@ from app.models.carts_products_model import CartProductModel
 from app.models.customer_model import CustomerModel
 from app.services.entity_services import EntityServices
 from http import HTTPStatus
+from flask_jwt_extended import jwt_required
 
 
 class CartResource(Resource):
+    @jwt_required()
     def get(self, customer_id):
 
         current_customer = EntityServices.get_entity_by_id(CustomerModel, customer_id)
@@ -34,6 +36,7 @@ class CartResource(Resource):
 
 
 class CartProductResource(Resource):
+    @jwt_required()
     def post(self, customer_id, product_id):
         parser = reqparse.RequestParser()
 

@@ -5,6 +5,8 @@ from app.models.customer_model import CustomerModel
 from flask import jsonify, make_response
 from app.services.customer_service import CustomerServices
 from sqlalchemy.exc import IntegrityError
+from app.services.auth_admin_service import admin_required
+from flask_jwt_extended import jwt_required
 
 
 class CustomerResource(Resource):
@@ -26,6 +28,7 @@ class CustomerResource(Resource):
         except IntegrityError as _:
             return {"error": {"message": "This product already exists"}}, 422
 
+    @admin_required()
     def get(self):
         list_customer = EntityServices.get_all_entity(CustomerModel)
 
@@ -33,11 +36,13 @@ class CustomerResource(Resource):
 
 
 class CustomerIdResource(Resource):
+    @jwt_required()
     def get(self, customer_id: int):
         found_customer = EntityServices.get_entity_by_id(CustomerModel, customer_id)
 
         return make_response(jsonify(found_customer), HTTPStatus.OK)
 
+    @jwt_required()
     def patch(self, customer_id: int):
         try:
             parser = reqparse.RequestParser()
