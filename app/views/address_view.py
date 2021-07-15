@@ -7,9 +7,11 @@ from app.services.entity_services import EntityServices
 from app.models.address_model import AddressModel
 
 from flask import jsonify, make_response
+from flask_jwt_extended import jwt_required
 
 
 class AddressIdCustomerResource(Resource):
+    @jwt_required()
     def post(self, customer_id: int):
         """Método ainda não cria customer"""
 
@@ -32,18 +34,25 @@ class AddressIdCustomerResource(Resource):
 
         return make_response(jsonify(create_address), HTTPStatus.CREATED)
 
+    @jwt_required()
     def get(self, customer_id: int):
-        list_address = [ad for ad in EntityServices.get_all_entity(AddressModel) if ad.customer_id == customer_id]
+        list_address = [
+            ad
+            for ad in EntityServices.get_all_entity(AddressModel)
+            if ad.customer_id == customer_id
+        ]
 
         return make_response(jsonify(list_address), HTTPStatus.OK)
 
 
 class AdressIdResource(Resource):
+    @jwt_required()
     def get(self, address_id: int):
         found_address = EntityServices.get_entity_by_id(AddressModel, address_id)
 
         return make_response(jsonify(found_address), HTTPStatus.OK)
 
+    @jwt_required()
     def patch(self, address_id: int):
         parser = reqparse.RequestParser()
 

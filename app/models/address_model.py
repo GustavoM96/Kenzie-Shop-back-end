@@ -31,6 +31,6 @@ class AddressModel(db.Model):
     state = Column(String(50), nullable=False)
     created_at = Column(TIMESTAMP, default=datetime.now())
     updated_at = Column(TIMESTAMP, default=datetime.now())
-    customer_id = Column(Integer, ForeignKey("customers.id"), nullable=True)
+    customer_id = Column(Integer, ForeignKey("customers.id"))
 
     customers = relationship("CustomerModel", backref=backref("address"))
