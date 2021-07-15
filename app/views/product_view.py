@@ -24,18 +24,16 @@ class ProductResource(Resource):
 
             args = parser.parse_args()
 
-            print(args["created_at"])
-            print(type(args["created_at"]))
-
+           
             created_product = EntityServices.create_entity(ProductModel, args)
-
-            print(created_product)
+         
 
             return make_response(jsonify(created_product), HTTPStatus.CREATED)
-            return args
+          
 
         except IntegrityError as _:
             return {"error": {"message": "This product already exists"}}, 422
+
 
     def get(self):
         list_product = EntityServices.get_all_entity(ProductModel)
