@@ -21,11 +21,11 @@ class ProductModel(db.Model):
 
     id = Column(Integer, primary_key=True)
 
-    name = Column(String(126), nullable=True, unique=True)
-    description = Column(Text, nullable=True)
-    current_price = Column(Float, nullable=True)
+    name = Column(String(126), nullable=False, unique=True)
+    description = Column(Text, nullable=False)
+    current_price = Column(Float, nullable=False)
     discount = Column(Integer, default=0)
-    amount_products = Column(Integer, nullable=True)
-    created_at = Column(TIMESTAMP, nullable=True, default=datetime.now())
-    updated_at = Column(TIMESTAMP, nullable=True)
+    amount_products = Column(Integer, nullable=False)
+    created_at = Column(TIMESTAMP, nullable=False, default=datetime.now())
+    updated_at = Column(TIMESTAMP, nullable=False)
     image_url = Column(Text)
