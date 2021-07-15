@@ -2,4 +2,4 @@ from .customer_view import CustomerResource, CustomerIdResource
 from .product_view import ProductResource, ProductIdResource
 from .address_view import AddressIdCustomerResource, AdressIdResource
 from .auth_view import AuthCustomerResource, AuthAdminResource
-from .admin_model import AdminResource
+from .admin_view import AdminResource
