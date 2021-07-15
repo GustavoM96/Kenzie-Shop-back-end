@@ -28,7 +28,7 @@ Body - No Content
 
 Request - 200 
 ```
-> <font size="4" color="gree"> Retornar todos os usuários cadastrados  </font>
+> <font size="4" color="#00ff2a"> Retornar todos os usuários cadastrados  </font>
 
 <br>
 
@@ -41,7 +41,7 @@ Body - No Content
 
 Request - 200 
 ```
-> <font size="4" color="gree"> Retornar o usuário passado pelo customer_id cadastrado </font>
+> <font size="4" color="#00ff2a"> Retornar o usuário passado pelo customer_id cadastrado </font>
 
 <br>
 
@@ -54,7 +54,7 @@ Body - No Content
 
 Request - 200 
 ```
-> <font size="4" color="gree"> Retornar o usuário passado pelo customer_id cadastrado </font>
+> <font size="4" color="#00ff2a"> Retornar o usuário passado pelo customer_id cadastrado </font>
 
 <br>
 
@@ -74,7 +74,7 @@ Body - {
 
 Request - 201
 ```
-> <font size="4" color="gree"> Criação de um usuário teste referente ao body json passado </font>
+> <font size="4" color="#00ff2a"> Criação de um usuário teste referente ao body json passado </font>
 
 <br>
 
@@ -91,7 +91,7 @@ Body - {
 
 Request - 200
 ```
-> <font size="4" color="gree"> Alteração de informações do usuário respectivo ao customer_id podendo passar uma ou mais parametros pelo body </font>
+> <font size="4" color="#00ff2a"> Alteração de informações do usuário respectivo ao customer_id podendo passar uma ou mais parametros pelo body </font>
 
 <br>
 
@@ -112,7 +112,7 @@ Body - {
 
 Request - 201
 ```
-> <font size="4" color="gree"> Criação do Admin </font>
+> <font size="4" color="#00ff2a"> Criação do Admin </font>
 
 
 <br>
@@ -133,7 +133,7 @@ Body - {
 
 Request - 200
 ```
-> <font size="4" color="gree"> Validação de admin, retornando o token </font>
+> <font size="4" color="#00ff2a"> Validação de admin, retornando o token </font>
 
 </br>
 
@@ -149,7 +149,7 @@ Body - {
 
 Request - 200
 ```
-> <font size="4" color="gree"> Validação de usuário, retornando o token </font>
+> <font size="4" color="#00ff2a"> Validação de usuário, retornando o token </font>
 
 </br>
 
@@ -168,7 +168,7 @@ Body - No Content
 
 Request - 200 
 ```
-> <font size="4" color="gree"> Retornar apenas os endereços do usuário respectivo  </font>
+> <font size="4" color="#00ff2a"> Retornar apenas os endereços do usuário respectivo  </font>
 
 <br>
 
@@ -181,7 +181,7 @@ Body - No Content
 
 Request - 200 
 ```
-> <font size="4" color="gree"> Retornar apenas um endereço especifico  </font>
+> <font size="4" color="#00ff2a"> Retornar apenas um endereço especifico  </font>
 
 <br>
 
@@ -203,7 +203,7 @@ Body - {
 Request - 201
 ```
 
-> <font size="4" color="gree"> Creação do endereço relacionando ao usuário respectivo </font>
+> <font size="4" color="#00ff2a"> Creação do endereço relacionando ao usuário respectivo </font>
 
 <br>
 
@@ -219,7 +219,7 @@ Body - {
 
 Request - 200
 ```
-> <font size="4" color="gree"> Alteração de informações do endereço respectivo ao address_id podendo passar uma ou mais parametros pelo body</font>
+> <font size="4" color="#00ff2a"> Alteração de informações do endereço respectivo ao address_id podendo passar uma ou mais parametros pelo body</font>
 
 <br>
 <h1 id="product">📦  Products</h1>
@@ -234,7 +234,7 @@ Body - No Content
 
 Request - 200 
 ```
-> <font size="4" color="gree"> Retornar todos os produtos cadastrados </font>
+> <font size="4" color="#00ff2a"> Retornar todos os produtos cadastrados </font>
 
 <br>
 
@@ -247,7 +247,7 @@ Body - No Content
 
 Request - 200 
 ```
-> <font size="4" color="gree"> Retornar o produto especifico passado pelo product_id </font>
+> <font size="4" color="#00ff2a"> Retornar o produto especifico passado pelo product_id </font>
 
 <br>
  
@@ -268,7 +268,7 @@ Body - {
 
 Request - 201
 ```
-> <font size="4" color="gree"> Alteração de informações do endereço respectivo ao address_id podendo passar uma ou mais parametros pelo body</font>
+> <font size="4" color="#00ff2a"> Alteração de informações do endereço respectivo ao address_id podendo passar uma ou mais parametros pelo body</font>
 
 <br>
 
@@ -286,7 +286,7 @@ Body - {
 
 Request - 201
 ```
-> <font size="4" color="gree"> Alteração de informações do produto respectivo ao product_id podendo passar uma ou mais parametros pelo body</font>
+> <font size="4" color="#00ff2a"> Alteração de informações do produto respectivo ao product_id podendo passar uma ou mais parametros pelo body</font>
 
 </br>
 
@@ -300,7 +300,7 @@ Body - No Content
 
 Request - 200
 ```
-> <font size="4" color="gree">Deletando produto referente ao product_id</font>
+> <font size="4" color="#00ff2a">Deletando produto referente ao product_id</font>
 
 </br>
 
@@ -316,7 +316,7 @@ Body - No Content
 
 Request - 200 
 ```
-> <font size="4" color="gree"> Retornar todos os produtos do carrinho referente ao usuário </font>
+> <font size="4" color="#00ff2a"> Retornar todos os produtos do carrinho referente ao usuário </font>
 
 </br>
 
@@ -331,7 +331,7 @@ Body - No Content
 
 Request - 201
 ```
-> <font size="4" color="gree"> Adicionar um produto ao carrinho do usuário referente ao customer_id e o produto referente ao product_id  </font>
+> <font size="4" color="#00ff2a"> Adicionar um produto ao carrinho do usuário referente ao customer_id e o produto referente ao product_id  </font>
 
 
 
