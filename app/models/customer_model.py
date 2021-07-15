@@ -9,6 +9,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 @dataclass
 class CustomerModel(db.Model):
+    id: int
     name: str
     last_name: str
     email: str
@@ -22,7 +23,7 @@ class CustomerModel(db.Model):
 
     name = Column(String(126), nullable=True)
     last_name = Column(String(126), nullable=True)
-    email = Column(String(126), nullable=True)
+    email = Column(String, nullable=True, unique=True)
     password_hash = Column(String(126), nullable=True)
     cart_id = Column(Integer, ForeignKey("carts.id"), unique=True, nullable=False)
     create_at = Column(TIMESTAMP, default=datetime.now())
