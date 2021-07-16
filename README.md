@@ -20,7 +20,7 @@
 <br>
 
 ```
-Method - GET 
+Method - GET (ADMIN AUTH)
 
 Endpoint - /customer
 
@@ -37,18 +37,7 @@ Method - GET
 
 Endpoint - /customer/<customer_id>
 
-Body - No Content
-
-Request - 200 
-```
-> <font size="4" color="#00ff2a"> Retornar o usuário passado pelo customer_id cadastrado </font>
-
-<br>
-
-```
-Method - GET 
-
-Endpoint - /customer/<customer_id>
+Header - Authorization: Bearer <token_user>
 
 Body - No Content
 
@@ -74,7 +63,7 @@ Body - {
 
 Request - 201
 ```
-> <font size="4" color="#00ff2a"> Criação de um usuário teste referente ao body json passado </font>
+> <font size="4" color="#00ff2a"> Criação de um usuário referente ao body json passado </font>
 
 <br>
 
@@ -84,6 +73,8 @@ Request - 201
 Method - PATCH
 
 Endpoint - /customer/<customer_id>
+
+Header - Authorization: Bearer <token_user>
 
 Body - {
 		"name": "Rodoifo"
@@ -164,6 +155,8 @@ Method - GET
 
 Endpoint - /customer/<customer_id>/address
 
+Header - Authorization: Bearer <token_user>
+
 Body - No Content
 
 Request - 200 
@@ -176,6 +169,8 @@ Request - 200
 Method - GET 
 
 Endpoint - /address/<address_id>
+
+Header - Authorization: Bearer <token_user>
 
 Body - No Content
 
@@ -190,6 +185,8 @@ Request - 200
 Method - POST
 
 Endpoint - /customer/<customer_id>/address
+
+Header - Authorization: Bearer <token_user>
 
 Body - {
 		"name": "Rua Dom Pedro II",
@@ -212,6 +209,8 @@ Request - 201
 Method - PATCH
 
 Endpoint - /address/<address_id>
+
+Header - Authorization: Bearer <token_user>
 
 Body - {
 		"name": "Rua Fragoso perreira frantz"	
@@ -257,6 +256,8 @@ Method - POST (ADMIN)
 
 Endpoint - /product
 
+Header - Authorization: Bearer <token_admin>
+
 Body - {
 	"name":"Camiseta",
 	"description":"Camiseta Branca M",
@@ -278,6 +279,8 @@ Method - PATCH (ADMIN)
 
 Endpoint - /product/<product_id>
 
+Header - Authorization: Bearer <token_admin>
+
 Body - {
 	"description":"Camiseta Preta G",
 	"current_price":55
@@ -296,6 +299,8 @@ Method - DELETE (ADMIN)
 
 Endpoint - /product/<product_id>
 
+Header - Authorization: Bearer <token_admin>
+
 Body - No Content
 
 Request - 200
@@ -312,6 +317,8 @@ Method - GET
 
 Endpoint - /customers/<customer_id>/cart/
 
+Header - Authorization: Bearer <token_user>
+
 Body - No Content
 
 Request - 200 
@@ -326,6 +333,8 @@ Request - 200
 Method - POST
 
 Endpoint - /customers/<customer_id>/cart/<product_id>
+
+Header - Authorization: Bearer <token_user>
 
 Body - No Content
 
