@@ -22,3 +22,5 @@ class ShipmentModel(db.Model):
     zipcode: str
     city: str
     state: str
+
+    __tablename__ = 'shipments'
