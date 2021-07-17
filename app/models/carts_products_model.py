@@ -1,5 +1,5 @@
 from app.config.database import db
-from sqlalchemy import Column, Integer, Float
+from sqlalchemy import Column, Integer, Float, UniqueConstraint
 from sqlalchemy.schema import ForeignKey
 from dataclasses import dataclass
 from sqlalchemy.orm import relationship, backref
@@ -17,6 +17,9 @@ class CartProductModel(db.Model):
 
     __tablename__ = "carts_products"
 
+    __table_args__ = (
+        UniqueConstraint("cart_id", "product_id", name="cart_product_uc"),
+    )
     id = Column(Integer, primary_key=True)
 
     quantity_product = Column(Integer, nullable=False)
