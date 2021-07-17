@@ -1,4 +1,3 @@
-from marshmallow.fields import Boolean
 from app.config.database import db
 
 from datetime import datetime
@@ -38,3 +37,6 @@ class ShipmentModel(db.Model):
     zipcode = Column(String(9), nullable=False)
     city = Column(String(50), nullable=False)
     state = Column(String(50), nullable=False)
+    order_id = Column(Integer, ForeignKey("order.id"))
+
+    order = relationship("OrderModel", backref=backref("shipments"))
