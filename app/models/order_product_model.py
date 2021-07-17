@@ -9,5 +9,8 @@ from sqlalchemy import Column, String, Integer, TIMESTAMP
 
 
 @dataclass
-class AddressModel(db.Model):
-    ...
+class OrderProductModel(db.Model):
+    id: int
+    sold_price: int
+    product_quantity: int
+    total_price: str
