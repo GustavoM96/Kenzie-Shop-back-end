@@ -37,6 +37,6 @@ class ShipmentModel(db.Model):
     zipcode = Column(String(9), nullable=False)
     city = Column(String(50), nullable=False)
     state = Column(String(50), nullable=False)
-    order_id = Column(Integer, ForeignKey("order.id"))
+    order_id = Column(Integer, ForeignKey("orders.id"))
 
-    order = relationship("OrderModel", backref=backref("shipments"))
+    orders = relationship("OrderModel", backref=backref("shipments"))
