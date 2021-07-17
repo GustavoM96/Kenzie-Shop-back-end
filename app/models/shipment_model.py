@@ -16,7 +16,7 @@ class ShipmentModel(db.Model):
     status: str
     arrival_date: datetime
     post_date: datetime
-    name: str
+    street: str
     number: int
     complement: str
     zipcode: str
@@ -31,7 +31,7 @@ class ShipmentModel(db.Model):
     status = Column(String)
     arrival_date = Column(TIMESTAMP)
     post_date = Column(TIMESTAMP)
-    name = Column(String(50), nullable=False)
+    street = Column(String(50), nullable=False)
     number = Column(Integer)
     complement = Column(String(50))
     zipcode = Column(String(9), nullable=False)
