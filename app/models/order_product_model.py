@@ -14,3 +14,7 @@ class OrderProductModel(db.Model):
     sold_price: int
     product_quantity: int
     total_price: str
+
+    __tablename__ = 'orders_products'
+
+    
