@@ -9,7 +9,7 @@ from sqlalchemy import Column, String, Integer, TIMESTAMP, Boolean
 
 
 @dataclass
-class OrdersModel(db.Model):
+class OrderModel(db.Model):
     id: int
     customer_id: int
     invoice_url: str
