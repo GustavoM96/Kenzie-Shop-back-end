@@ -1,5 +1,6 @@
 from app.services.helper import add_all_commit, add_commit, delete_commit
 from flask_sqlalchemy.model import Model
+from app.exc import NotFoundEntityError
 
 
 class EntityServices:
@@ -18,17 +19,26 @@ class EntityServices:
     def get_entity_by_id(model: Model, entity_id: int) -> Model:
         found_entity = model.query.get(entity_id)
 
+        if not found_entity:
+            raise NotFoundEntityError(model)
+
         return found_entity
 
     @staticmethod
     def get_entity_by_keys(model: Model, **kargs) -> Model:
         found_entity = model.query.filter_by(**kargs).first()
 
+        if not found_entity:
+            raise NotFoundEntityError(model)
+
         return found_entity
 
     @staticmethod
     def get_all_entity_by_keys(model: Model, **kargs) -> list[Model]:
         found_list_entity = model.query.filter_by(**kargs).all()
+
+        if not found_list_entity:
+            raise NotFoundEntityError(model)
 
         return found_list_entity
 

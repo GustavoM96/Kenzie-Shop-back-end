@@ -33,3 +33,7 @@ def get_now():
     year = datetime.now().year
 
     return datetime(year, month, day, hour, minute)
+
+
+def message_integrety_error(model: Model):
+    return {"error": f"This entity already exists on {model.__tablename__}"}
