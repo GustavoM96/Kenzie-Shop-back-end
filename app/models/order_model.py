@@ -9,7 +9,7 @@ from sqlalchemy import Column, String, Integer, TIMESTAMP
 
 
 @dataclass
-class AddressModel(db.Model):
+class OrdersModel(db.Model):
     id: int
     customer_id: int
     invoice_url: str
@@ -19,3 +19,6 @@ class AddressModel(db.Model):
     total:int 
     created_at: datetime
     payment_type: str
+
+    __tablename__ = 'orders'
+    
