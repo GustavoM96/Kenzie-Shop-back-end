@@ -10,4 +10,15 @@ from sqlalchemy import Column, String, Integer, TIMESTAMP
 
 @dataclass
 class ShipmentModel(db.Model):
-    ...
+    id: int
+    code_post_offices: str
+    was_dispatch: bool
+    status: str
+    arrival_date: datetime
+    post_date: datetime
+    name: str
+    number: int
+    complement: str
+    zipcode: str
+    city: str
+    state: str
