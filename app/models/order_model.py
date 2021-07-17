@@ -10,4 +10,12 @@ from sqlalchemy import Column, String, Integer, TIMESTAMP
 
 @dataclass
 class AddressModel(db.Model):
-    ...
+    id: int
+    customer_id: int
+    invoice_url: str
+    was_paid: bool
+    total_price: int
+    shipping_price: int
+    total:int 
+    created_at: datetime
+    payment_type: str
