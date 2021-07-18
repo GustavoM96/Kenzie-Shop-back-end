@@ -26,6 +26,6 @@ class ProductModel(db.Model):
     current_price = Column(Float, nullable=False)
     discount = Column(Integer, default=0)
     amount_products = Column(Integer, nullable=False)
-    created_at = Column(TIMESTAMP, nullable=False, default=datetime.now())
-    updated_at = Column(TIMESTAMP, nullable=False)
+    created_at = Column(TIMESTAMP, default=datetime.now())
+    updated_at = Column(TIMESTAMP, default=datetime.now())
     image_url = Column(Text)

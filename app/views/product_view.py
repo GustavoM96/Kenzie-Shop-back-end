@@ -2,7 +2,7 @@ from flask_restful import Resource, reqparse
 from http import HTTPStatus
 from app.models.product_model import ProductModel
 from app.services.entity_services import EntityServices
-from app.services.helper import get_now, message_integrety_error
+from app.services.helper import message_integrety_error
 from flask import jsonify, make_response
 from datetime import datetime
 from sqlalchemy.exc import IntegrityError
@@ -20,8 +20,6 @@ class ProductResource(Resource):
         parser.add_argument("discount", type=int, required=True)
         parser.add_argument("amount_products", type=int, required=True)
         parser.add_argument("image_url", type=str, required=True)
-        parser.add_argument("created_at", type=str, default=get_now())
-        parser.add_argument("updated_at", type=str, default=get_now())
 
         args = parser.parse_args()
 
@@ -59,7 +57,7 @@ class ProductIdResource(Resource):
         parser.add_argument("current_price", type=int)
         parser.add_argument("discount", type=int)
         parser.add_argument("amount_products", type=int)
-        parser.add_argument("updated_at", type=datetime)
+        parser.add_argument("updated_at", type=datetime, default=datetime.now())
         parser.add_argument("image_url", type=str)
 
         args = parser.parse_args()

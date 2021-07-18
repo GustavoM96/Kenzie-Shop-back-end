@@ -17,7 +17,3 @@ class CartModel(db.Model):
 
     is_empty = Column(Boolean, nullable=False)
     total_price = Column(Float, nullable=False)
-
-    # products = relationship(
-    #     "ProductModel", secondary="carts_products", backref=backref("carts")
-    # )

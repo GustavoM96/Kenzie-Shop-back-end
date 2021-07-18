@@ -26,8 +26,6 @@ class AddressIdCustomerResource(Resource):
         parser.add_argument("zipcode", type=str, required=True)
         parser.add_argument("city", type=str, required=True)
         parser.add_argument("state", type=str, required=True)
-        parser.add_argument("created_at", type=datetime)
-        parser.add_argument("updated_at", type=datetime)
 
         args = parser.parse_args()
 
@@ -71,7 +69,7 @@ class AdressIdResource(Resource):
         parser.add_argument("zipcode", type=str)
         parser.add_argument("city", type=str)
         parser.add_argument("state", type=str)
-        parser.add_argument("update_at", type=datetime, default=datetime.now())
+        parser.add_argument("updated_at", type=datetime, default=datetime.now())
 
         args = parser.parse_args()
 

@@ -1,9 +1,10 @@
 from app.config.database import db
-from sqlalchemy import Column, Integer, Float, UniqueConstraint
+from sqlalchemy import Column, Integer, Float, UniqueConstraint, TIMESTAMP
 from sqlalchemy.schema import ForeignKey
 from dataclasses import dataclass
 from sqlalchemy.orm import relationship, backref
 from app.models.product_model import ProductModel
+from datetime import datetime
 
 
 @dataclass
@@ -28,5 +29,8 @@ class CartProductModel(db.Model):
     cart_id = Column(Integer, ForeignKey("carts.id"), nullable=False)
 
     product_id = Column(Integer, ForeignKey("products.id"), nullable=False)
+
+    created_at = Column(TIMESTAMP, default=datetime.now())
+    updated_at = Column(TIMESTAMP, default=datetime.now())
 
     product = relationship("ProductModel", backref=backref("cart_products"))
