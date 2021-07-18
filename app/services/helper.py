@@ -25,11 +25,5 @@ def delete_commit(model: Model) -> None:
     session.commit()
 
 
-def get_now():
-    minute = datetime.now().minute
-    hour = datetime.now().hour
-    day = datetime.now().day
-    month = datetime.now().month
-    year = datetime.now().year
-
-    return datetime(year, month, day, hour, minute)
+def message_integrety_error(model: Model):
+    return {"error": f"This entity already exists on {model.__tablename__}"}

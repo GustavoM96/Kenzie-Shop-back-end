@@ -9,11 +9,13 @@ from app.models.address_model import AddressModel
 from flask import jsonify, make_response
 from flask_jwt_extended import jwt_required
 
+from app.exc import NotFoundEntityError
+from app.services.helper import message_integrety_error
+
 
 class AddressIdCustomerResource(Resource):
     @jwt_required()
     def post(self, customer_id: int):
-        """Método ainda não cria customer"""
 
         parser = reqparse.RequestParser()
 
@@ -24,33 +26,38 @@ class AddressIdCustomerResource(Resource):
         parser.add_argument("zipcode", type=str, required=True)
         parser.add_argument("city", type=str, required=True)
         parser.add_argument("state", type=str, required=True)
-        parser.add_argument("created_at", type=datetime)
-        parser.add_argument("updated_at", type=datetime)
 
         args = parser.parse_args()
 
-        """ modelo de criação de entidade"""
-        create_address = EntityServices.create_entity(AddressModel, args)
+        try:
+            create_address = EntityServices.create_entity(AddressModel, args)
+            return make_response(jsonify(create_address), HTTPStatus.CREATED)
 
-        return make_response(jsonify(create_address), HTTPStatus.CREATED)
+        except NotFoundEntityError as error:
+            return error.message, HTTPStatus.NOT_FOUND
 
     @jwt_required()
     def get(self, customer_id: int):
-        list_address = [
-            ad
-            for ad in EntityServices.get_all_entity(AddressModel)
-            if ad.customer_id == customer_id
-        ]
 
-        return make_response(jsonify(list_address), HTTPStatus.OK)
+        try:
+            list_address = EntityServices.get_all_entity_by_keys(
+                AddressModel, customer_id=customer_id
+            )
+            return make_response(jsonify(list_address), HTTPStatus.OK)
+
+        except NotFoundEntityError as error:
+            return error.message, HTTPStatus.NOT_FOUND
 
 
 class AdressIdResource(Resource):
     @jwt_required()
     def get(self, address_id: int):
-        found_address = EntityServices.get_entity_by_id(AddressModel, address_id)
+        try:
+            found_address = EntityServices.get_entity_by_id(AddressModel, address_id)
+            return make_response(jsonify(found_address), HTTPStatus.OK)
 
-        return make_response(jsonify(found_address), HTTPStatus.OK)
+        except NotFoundEntityError as error:
+            return error.message, HTTPStatus.NOT_FOUND
 
     @jwt_required()
     def patch(self, address_id: int):
@@ -59,16 +66,17 @@ class AdressIdResource(Resource):
         parser.add_argument("name", type=str)
         parser.add_argument("number", type=int)
         parser.add_argument("complement", type=str)
-        parser.add_argument("password", type=str)
         parser.add_argument("zipcode", type=str)
         parser.add_argument("city", type=str)
         parser.add_argument("state", type=str)
-        parser.add_argument("update_at", type=datetime, default=datetime.now())
+        parser.add_argument("updated_at", type=datetime, default=datetime.now())
 
         args = parser.parse_args()
 
-        found_address = EntityServices.get_entity_by_id(AddressModel, address_id)
+        try:
+            found_address = EntityServices.get_entity_by_id(AddressModel, address_id)
+            updated_address = EntityServices.update_entity(found_address, args)
+            return make_response(jsonify(updated_address), HTTPStatus.OK)
 
-        updated_address = EntityServices.update_entity(found_address, args)
-
-        return make_response(jsonify(updated_address), HTTPStatus.OK)
+        except NotFoundEntityError as error:
+            return error.message, HTTPStatus.NOT_FOUND
