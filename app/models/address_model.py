@@ -11,6 +11,7 @@ from sqlalchemy import Column, String, Integer, TIMESTAMP
 @dataclass
 class AddressModel(db.Model):
     id: int
+    customer_id: int
     name: str
     number: int
     complement: str
@@ -33,4 +34,4 @@ class AddressModel(db.Model):
     updated_at = Column(TIMESTAMP, default=datetime.now())
     customer_id = Column(Integer, ForeignKey("customers.id"))
 
-    customers = relationship("CustomerModel", backref=backref("address"))
+    customer = relationship("CustomerModel", backref=backref("addresses"))
