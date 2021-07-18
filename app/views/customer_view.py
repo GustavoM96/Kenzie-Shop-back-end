@@ -4,9 +4,9 @@ from app.services.entity_services import EntityServices
 from app.models.customer_model import CustomerModel
 from flask import jsonify, make_response
 from app.services.customer_service import CustomerServices
-from sqlalchemy.exc import IntegrityError
 from app.services.auth_admin_service import admin_required
 from flask_jwt_extended import jwt_required
+from sqlalchemy.exc import IntegrityError
 from app.exc import NotFoundEntityError
 from app.services.helper import message_integrety_error
 
@@ -56,6 +56,7 @@ class CustomerIdResource(Resource):
 
         parser.add_argument("name", type=str)
         parser.add_argument("last_name", type=str)
+        parser.add_argument("updated_at", type=datetime, default=datetime.now())
 
         args = parser.parse_args()
 

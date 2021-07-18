@@ -9,7 +9,6 @@ from app.services.helper import message_integrety_error
 
 class AdminResource(Resource):
     def post(self):
-        """Método ainda não cria customer"""
 
         parser = reqparse.RequestParser()
 

@@ -1,5 +1,5 @@
 from collections import defaultdict
-from flask import jsonify, make_response
+from flask import jsonify, make_response, request
 from flask_restful import Resource, reqparse
 from app.models.cart_model import CartModel
 from app.models.product_model import ProductModel
@@ -11,6 +11,7 @@ from flask_jwt_extended import jwt_required
 from sqlalchemy.exc import IntegrityError
 from app.exc import NotFoundEntityError
 from app.services.helper import message_integrety_error
+from datetime import datetime
 
 
 class CartResource(Resource):
@@ -34,23 +35,20 @@ class CartResource(Resource):
 class CartProductResource(Resource):
     @jwt_required()
     def post(self, customer_id, product_id):
-        parser = reqparse.RequestParser()
 
-        parser.add_argument("quantity_product", type=int, default=1)
-
-        args = parser.parse_args()
+        quantity_product = int(request.args.get("quantity_product", 1))
 
         try:
             current_customer = EntityServices.get_entity_by_id(
                 CustomerModel, customer_id
             )
             current_product = EntityServices.get_entity_by_id(ProductModel, product_id)
-            total_price = current_product.current_price * args["quantity_product"]
+            total_price = current_product.current_price * quantity_product
             customer_cart: CartModel = current_customer.cart
             cart_product: dict = {
                 "cart_id": customer_cart.id,
                 "product_id": product_id,
-                "quantity_product": args["quantity_product"],
+                "quantity_product": quantity_product,
                 "total_price": total_price,
             }
             created_cart_product = EntityServices.create_entity(
@@ -68,22 +66,20 @@ class CartProductResource(Resource):
             )
 
     def patch(self, customer_id, product_id):
-        parser = reqparse.RequestParser()
 
-        parser.add_argument("quantity_product", type=int, required=True)
-
-        args = parser.parse_args()
+        quantity_product = int(request.args.get("quantity_product", 1))
 
         try:
             current_customer = EntityServices.get_entity_by_id(
                 CustomerModel, customer_id
             )
             current_product = EntityServices.get_entity_by_id(ProductModel, product_id)
-            updated_price = current_product.current_price * args["quantity_product"]
+            updated_price = current_product.current_price * quantity_product
             customer_cart: CartModel = current_customer.cart
             data_cart_product: dict = {
-                "quantity_product": args["quantity_product"],
+                "quantity_product": quantity_product,
                 "total_price": updated_price,
+                "updated_at": datetime.now(),
             }
             current_cart_product = EntityServices.get_entity_by_keys(
                 CartProductModel, cart_id=customer_cart.id, product_id=product_id
