@@ -7,15 +7,15 @@ from app.models.carts_products_model import CartProductModel
 from app.models.customer_model import CustomerModel
 from app.services.entity_services import EntityServices
 from http import HTTPStatus
-from flask_jwt_extended import jwt_required
 from sqlalchemy.exc import IntegrityError
 from app.exc import NotFoundEntityError
 from app.services.helper import message_integrety_error
 from datetime import datetime
+from app.services.auth_service import admin_required, customer_required
 
 
 class CartResource(Resource):
-    @jwt_required()
+    @customer_required()
     def get(self, customer_id):
         try:
             current_customer = EntityServices.get_entity_by_id(
@@ -33,7 +33,7 @@ class CartResource(Resource):
 
 
 class CartProductResource(Resource):
-    @jwt_required()
+    @customer_required()
     def post(self, customer_id, product_id):
 
         quantity_product = int(request.args.get("quantity_product", 1))
@@ -65,6 +65,7 @@ class CartProductResource(Resource):
                 HTTPStatus.UNPROCESSABLE_ENTITY,
             )
 
+    @customer_required()
     def patch(self, customer_id, product_id):
 
         quantity_product = int(request.args.get("quantity_product", 1))
@@ -92,6 +93,7 @@ class CartProductResource(Resource):
         except NotFoundEntityError as error:
             return error.message, HTTPStatus.NOT_FOUND
 
+    @customer_required()
     def delete(self, customer_id, product_id):
         try:
             current_customer = EntityServices.get_entity_by_id(

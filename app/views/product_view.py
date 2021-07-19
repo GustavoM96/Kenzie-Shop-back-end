@@ -6,7 +6,7 @@ from app.services.helper import message_integrety_error
 from flask import jsonify, make_response
 from datetime import datetime
 from sqlalchemy.exc import IntegrityError
-from app.services.auth_admin_service import admin_required
+from app.services.auth_service import admin_required, customer_required
 
 
 class ProductResource(Resource):

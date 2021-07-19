@@ -26,7 +26,10 @@ class AuthCustomerResource(Resource):
             if found_customer.verify_password(args["password"]):
                 access_token = create_access_token(
                     identity=found_customer,
-                    additional_claims={"is_administrator": False},
+                    additional_claims={
+                        "is_administrator": False,
+                        "customer_id": found_customer.id,
+                    },
                 )
                 return {"access_token": access_token}, HTTPStatus.OK
 
