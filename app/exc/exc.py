@@ -16,3 +16,10 @@ class PasswordError(Exception):
         self.message = self.message_error
 
         super().__init__(self.message)
+
+
+class DataError(Exception):
+    def __init__(self, model: Model) -> None:
+        self.message = {"error": f"value too long for type {model.__tablename__}"}
+
+        super().__init__(self.message)

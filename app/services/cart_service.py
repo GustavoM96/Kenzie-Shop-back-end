@@ -3,6 +3,7 @@ from app.models.carts_products_model import CartProductModel
 from app.models.customer_model import CustomerModel
 from app.models.product_model import ProductModel
 from datetime import datetime
+from app.exc import NotFoundEntityError
 
 from app.models.product_model import ProductModel
 from flask_sqlalchemy.model import Model
@@ -29,16 +30,23 @@ class CartServices:
     def get_cart(customer_id: int) -> dict:
         customer = EntityServices.get_entity_by_id(CustomerModel, customer_id)
 
-        list_products = EntityServices.get_all_entity_by_keys(
-            CartProductModel, cart_id=customer.cart.id
-        )
+        try:
+            list_products = EntityServices.get_all_entity_by_keys(
+                CartProductModel, cart_id=customer.cart.id
+            )
 
-        cart_dict = {
-            "products": list_products,
-            "total_price": customer.cart.total_price,
-            "is_empty": customer.cart.is_empty,
-        }
-        return cart_dict
+            cart_dict = {
+                "products": list_products,
+                "total_price": customer.cart.total_price,
+                "is_empty": customer.cart.is_empty,
+            }
+            return cart_dict
+        except NotFoundEntityError as _:
+            return {
+                "products": [],
+                "total_price": customer.cart.total_price,
+                "is_empty": customer.cart.is_empty,
+            }
 
     @classmethod
     def add_product_to_cart(

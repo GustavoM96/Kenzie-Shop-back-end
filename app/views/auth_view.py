@@ -6,6 +6,7 @@ from app.models.admin_model import AdminModel
 from flask_jwt_extended import create_access_token
 from flask import jsonify
 from app.exc import NotFoundEntityError, PasswordError
+from sqlalchemy.exc import DataError
 
 
 class AuthCustomerResource(Resource):
@@ -33,11 +34,14 @@ class AuthCustomerResource(Resource):
                 )
                 return {"access_token": access_token}, HTTPStatus.OK
 
-        except NotFoundEntityError as _:
+        except NotFoundEntityError as error:
             return PasswordError.message_error, HTTPStatus.BAD_REQUEST
 
-        except PasswordError as _:
+        except PasswordError as error:
             return PasswordError.message_error, HTTPStatus.BAD_REQUEST
+
+        except DataError as error:
+            return {"error": str(error.orig)}, HTTPStatus.UNPROCESSABLE_ENTITY
 
 
 class AuthAdminResource(Resource):
@@ -62,8 +66,11 @@ class AuthAdminResource(Resource):
                 )
                 return {"access_token": access_token}, HTTPStatus.OK
 
-        except NotFoundEntityError as _:
+        except NotFoundEntityError as error:
             return PasswordError.message_error, HTTPStatus.BAD_REQUEST
 
-        except PasswordError as _:
+        except PasswordError as error:
             return PasswordError.message_error, HTTPStatus.BAD_REQUEST
+
+        except DataError as error:
+            return {"error": str(error.orig)}, HTTPStatus.UNPROCESSABLE_ENTITY

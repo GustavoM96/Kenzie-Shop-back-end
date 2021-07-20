@@ -8,6 +8,7 @@ from app.models.address_model import AddressModel
 
 from flask import jsonify, make_response
 from flask_jwt_extended import jwt_required
+from sqlalchemy.exc import DataError
 
 from app.exc import NotFoundEntityError
 from app.services.helper import message_integrety_error
@@ -36,6 +37,9 @@ class AddressCustomerIdResource(Resource):
 
         except NotFoundEntityError as error:
             return error.message, HTTPStatus.NOT_FOUND
+
+        except DataError as error:
+            return {"error": str(error.orig)}, HTTPStatus.UNPROCESSABLE_ENTITY
 
     @customer_required()
     def get(self, customer_id: int):
@@ -81,6 +85,9 @@ class AddressIdCustomerIdResource(Resource):
 
         except NotFoundEntityError as error:
             return error.message, HTTPStatus.NOT_FOUND
+
+        except DataError as error:
+            return {"error": str(error.orig)}, HTTPStatus.UNPROCESSABLE_ENTITY
 
 
 class AddressIdResource(Resource):
