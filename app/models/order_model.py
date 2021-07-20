@@ -14,7 +14,6 @@ class OrderModel(db.Model):
     invoice_url: str
     was_paid: bool
     total_price: int
-    shipping_price: int
     total:int 
     created_at: datetime
     payment_type: str
@@ -26,7 +25,6 @@ class OrderModel(db.Model):
     invoice_url = Column(String)
     was_paid = Column(Boolean, nullable=False)
     total_price = Column(Integer, nullable=False)
-    shipping_price = Column(Integer)
     total = Column(Integer, nullable=False)
     created_at = Column(TIMESTAMP, default=datetime.now())
     customer_id = Column(Integer, ForeignKey('customers.id'))

@@ -15,6 +15,7 @@ class ShipmentModel(db.Model):
     status: str
     arrival_date: datetime
     post_date: datetime
+    shipping_price: int
     name: str
     number: int
     complement: str
@@ -29,6 +30,7 @@ class ShipmentModel(db.Model):
     status = Column(String)
     arrival_date = Column(TIMESTAMP)
     post_date = Column(TIMESTAMP)
+    shipping_price = Column(Integer)
     name = Column(String(50), nullable=False)
     number = Column(Integer)
     complement = Column(String(50))
