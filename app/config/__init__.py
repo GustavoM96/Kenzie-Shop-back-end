@@ -4,8 +4,7 @@ from flask_cors import CORS
 
 
 def load_configuration(app: Flask) -> None:
-
-    CORS(app)
+    CORS(app, resources={r"/*": {"origins": "*"}})
     configuration.init_app(app)
     database.init_app(app)
     migration.init_app(app)

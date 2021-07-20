@@ -26,7 +26,20 @@ class CartResource(Resource):
             list_products = EntityServices.get_all_entity_by_keys(
                 CartProductModel, cart_id=customer_cart.id
             )
-            return make_response(jsonify(list_products), HTTPStatus.OK)
+            total_price_cart = sum(product.total_price for product in list_products)
+
+            if list_products:
+                is_empty = False
+
+                updated_data = dict(total_price=total_price_cart, is_empty=is_empty)
+                updated_cart = EntityServices.update_entity(customer_cart, updated_data)
+
+            cart_dict = {
+                "products": list_products,
+                "total_price": updated_cart.total_price,
+                "is_empty": updated_cart.is_empty,
+            }
+            return make_response(jsonify(cart_dict), HTTPStatus.OK)
 
         except NotFoundEntityError as error:
             return error.message, HTTPStatus.NOT_FOUND

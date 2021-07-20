@@ -15,5 +15,5 @@ class CartModel(db.Model):
 
     id = Column(Integer, primary_key=True)
 
-    is_empty = Column(Boolean, nullable=False)
+    is_empty = Column(Boolean, nullable=False, default=True)
     total_price = Column(Float, nullable=False)
