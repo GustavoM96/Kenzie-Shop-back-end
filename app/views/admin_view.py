@@ -5,6 +5,7 @@ from app.models.admin_model import AdminModel
 from flask import jsonify, make_response
 from sqlalchemy.exc import IntegrityError
 from app.services.helper import message_integrety_error
+from sqlalchemy.exc import DataError
 
 
 class AdminResource(Resource):
@@ -22,8 +23,8 @@ class AdminResource(Resource):
             created_admin = EntityServices.create_entity(AdminModel, args)
             return make_response(jsonify(created_admin), HTTPStatus.CREATED)
 
-        except IntegrityError as _:
-            return (
-                message_integrety_error(AdminModel),
-                HTTPStatus.UNPROCESSABLE_ENTITY,
-            )
+        except IntegrityError as error:
+            return {"error": str(error.orig)}, HTTPStatus.UNPROCESSABLE_ENTITY
+
+        except DataError as error:
+            return {"error": str(error.orig)}, HTTPStatus.UNPROCESSABLE_ENTITY

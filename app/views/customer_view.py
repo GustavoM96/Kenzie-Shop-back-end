@@ -8,6 +8,7 @@ from app.services.auth_service import admin_required, customer_required
 from sqlalchemy.exc import IntegrityError
 from app.exc import NotFoundEntityError
 from app.services.helper import message_integrety_error
+from sqlalchemy.exc import DataError
 
 
 class CustomerResource(Resource):
@@ -25,11 +26,11 @@ class CustomerResource(Resource):
             created_user = CustomerServices.create_customer(args)
             return make_response(jsonify(created_user), HTTPStatus.CREATED)
 
-        except IntegrityError as _:
-            return (
-                message_integrety_error(CustomerModel),
-                HTTPStatus.UNPROCESSABLE_ENTITY,
-            )
+        except IntegrityError as error:
+            return ({"error": str(error.orig)}, HTTPStatus.UNPROCESSABLE_ENTITY)
+
+        except DataError as error:
+            return {"error": str(error.orig)}, HTTPStatus.UNPROCESSABLE_ENTITY
 
     @admin_required()
     def get(self):
@@ -66,3 +67,6 @@ class CustomerIdResource(Resource):
 
         except NotFoundEntityError as error:
             return error.message, HTTPStatus.NOT_FOUND
+
+        except DataError as error:
+            return {"error": str(error.orig)}, HTTPStatus.UNPROCESSABLE_ENTITY

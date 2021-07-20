@@ -13,6 +13,7 @@ from app.services.helper import message_integrety_error
 from datetime import datetime
 from app.services.auth_service import admin_required, customer_required
 from app.services.cart_service import CartServices
+from sqlalchemy.exc import DataError
 
 
 class CartResource(Resource):
@@ -41,16 +42,19 @@ class CartProductResource(Resource):
         except NotFoundEntityError as error:
             return error.message, HTTPStatus.NOT_FOUND
 
-        except IntegrityError as _:
-            return (
-                message_integrety_error(CartProductModel),
-                HTTPStatus.UNPROCESSABLE_ENTITY,
-            )
+        except IntegrityError as error:
+            return {"error": str(error.orig)}, HTTPStatus.UNPROCESSABLE_ENTITY
+
+        except DataError as error:
+            return {"error": str(error.orig)}, HTTPStatus.UNPROCESSABLE_ENTITY
 
     @customer_required()
     def patch(self, customer_id, product_id):
 
-        quantity_product = int(request.args.get("quantity_product", 1))
+        quantity_product = int(request.args.get("quantity_product", 0))
+
+        if not quantity_product:
+            return {"error": str(error.orig)}, HTTPStatus.UNPROCESSABLE_ENTITY
 
         try:
             updated_cart_product = CartServices.update_cart_product(
@@ -60,6 +64,9 @@ class CartProductResource(Resource):
 
         except NotFoundEntityError as error:
             return error.message, HTTPStatus.NOT_FOUND
+
+        except DataError as error:
+            return {"error": str(error.orig)}, HTTPStatus.UNPROCESSABLE_ENTITY
 
     @customer_required()
     def delete(self, customer_id, product_id):
