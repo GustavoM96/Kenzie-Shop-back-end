@@ -12,11 +12,11 @@ from sqlalchemy import Column, String, Integer, TIMESTAMP, Boolean
 class ShipmentModel(db.Model):
     id: int
     postal_code: str
-    was_dispatch: bool
     status: str
     arrival_date: datetime
     post_date: datetime
-    street: str
+    shipping_price: int
+    name: str
     number: int
     complement: str
     zipcode: str
@@ -27,11 +27,11 @@ class ShipmentModel(db.Model):
 
     id = Column(Integer, primary_key=True)
     postal_code = Column(String(20))
-    was_dispatch = Column(Boolean)
     status = Column(String)
     arrival_date = Column(TIMESTAMP)
     post_date = Column(TIMESTAMP)
-    street = Column(String(50), nullable=False)
+    shipping_price = Column(Integer)
+    name = Column(String(50), nullable=False)
     number = Column(Integer)
     complement = Column(String(50))
     zipcode = Column(String(9), nullable=False)
