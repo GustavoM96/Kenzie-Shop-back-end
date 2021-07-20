@@ -14,3 +14,4 @@ def init_app(app: Flask) -> None:
     app.config["SECRET_KEY"] = env("SECRET_KEY")
     app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(days=30)
     app.config["JWT_REFRESH_TOKEN_EXPIRES"] = timedelta(days=60)
+    app.config["CORS_HEADERS"] = "Content-Type"
