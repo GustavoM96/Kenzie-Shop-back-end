@@ -8,6 +8,7 @@ from datetime import datetime
 from sqlalchemy.exc import IntegrityError
 from app.services.auth_service import admin_required, customer_required
 from app.exc import NotFoundEntityError
+from sqlalchemy.exc import DataError
 
 
 class ProductResource(Resource):
@@ -28,11 +29,11 @@ class ProductResource(Resource):
             created_product = EntityServices.create_entity(ProductModel, args)
             return make_response(jsonify(created_product), HTTPStatus.CREATED)
 
-        except IntegrityError as _:
-            return make_response(
-                message_integrety_error(ProductModel),
-                HTTPStatus.UNPROCESSABLE_ENTITY,
-            )
+        except IntegrityError as error:
+            return {"error": str(error.orig)}, HTTPStatus.UNPROCESSABLE_ENTITY
+
+        except DataError as error:
+            return {"error": str(error.orig)}, HTTPStatus.UNPROCESSABLE_ENTITY
 
     def get(self):
         list_product = EntityServices.get_all_entity(ProductModel)
@@ -68,14 +69,14 @@ class ProductIdResource(Resource):
             updated_product = EntityServices.update_entity(found_product, args)
             return make_response(jsonify(updated_product), HTTPStatus.OK)
 
-        except IntegrityError as _:
-            return (
-                message_integrety_error(ProductModel),
-                HTTPStatus.UNPROCESSABLE_ENTITY,
-            )
+        except IntegrityError as error:
+            return {"error": str(error.orig)}, HTTPStatus.UNPROCESSABLE_ENTITY
 
         except NotFoundEntityError as error:
             return error.message, HTTPStatus.NOT_FOUND
+
+        except DataError as error:
+            return {"error": str(error.orig)}, HTTPStatus.UNPROCESSABLE_ENTITY
 
     @admin_required()
     def delete(self, product_id: int):
