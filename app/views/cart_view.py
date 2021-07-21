@@ -26,6 +26,15 @@ class CartResource(Resource):
         except NotFoundEntityError as error:
             return error.message, HTTPStatus.NOT_FOUND
 
+    @customer_required()
+    def delete(self, customer_id):
+        try:
+            CartServices.delete_all_cart_product(customer_id)
+            return "", HTTPStatus.NO_CONTENT
+
+        except NotFoundEntityError as error:
+            return error.message, HTTPStatus.NOT_FOUND
+
 
 class CartProductResource(Resource):
     @customer_required()
