@@ -7,6 +7,7 @@ from app.models.order_model import OrderModel
 from flask import jsonify, make_response
 from app.services.auth_service import customer_required
 from app.services.cart_service import CartServices
+from app.services.email_services import EmailService
 
 
 class OrderProductResource(Resource):
@@ -20,7 +21,7 @@ class OrderProductResource(Resource):
         return make_response(jsonify(list_order), HTTPStatus.OK)
 
     @customer_required()
-    def post(self, customer_id: int):
+    def post(self, customer_id: int, address_id: id):
 
         parser = reqparse.RequestParser()
 
@@ -32,6 +33,8 @@ class OrderProductResource(Resource):
         order = OrderServices.create_order(customer_id, args)
 
         order_product = OrderServices.create_order_product(customer_id, order.id)
+
+        EmailService.send_email(customer_id, address_id, order.id)
 
         CartServices.delete_all_cart_product(customer_id)
 
