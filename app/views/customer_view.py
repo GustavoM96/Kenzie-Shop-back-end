@@ -9,6 +9,7 @@ from sqlalchemy.exc import IntegrityError
 from app.exc import NotFoundEntityError
 from app.services.helper import message_integrety_error
 from sqlalchemy.exc import DataError
+from datetime import datetime
 
 
 class CustomerResource(Resource):
@@ -55,6 +56,7 @@ class CustomerIdResource(Resource):
         parser = reqparse.RequestParser()
 
         parser.add_argument("name", type=str)
+        parser.add_argument("email", type=str)
         parser.add_argument("last_name", type=str)
         parser.add_argument("updated_at", type=datetime, default=datetime.now())
 
@@ -70,3 +72,6 @@ class CustomerIdResource(Resource):
 
         except DataError as error:
             return {"error": str(error.orig)}, HTTPStatus.UNPROCESSABLE_ENTITY
+
+        except IntegrityError as error:
+            return ({"error": str(error.orig)}, HTTPStatus.UNPROCESSABLE_ENTITY)
