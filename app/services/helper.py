@@ -22,7 +22,3 @@ def delete_commit(model: Model) -> None:
 
     session.delete(model)
     session.commit()
-
-
-def message_integrety_error(model: Model):
-    return {"error": f"This entity already exists on {model.__tablename__}"}

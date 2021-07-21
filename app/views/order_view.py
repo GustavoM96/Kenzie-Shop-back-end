@@ -1,14 +1,9 @@
 from flask_restful import Resource, reqparse
-
 from http import HTTPStatus
 from app.services.entity_services import EntityServices
 from datetime import datetime
-from app.models.order_product_model import OrderProductModel
 from app.services.order_services import OrderServices
 from app.models.order_model import OrderModel
-from app.exc import NotFoundEntityError
-from sqlalchemy.exc import IntegrityError
-from app.services.helper import message_integrety_error
 from flask import jsonify, make_response
 from app.services.auth_service import customer_required
 from app.services.cart_service import CartServices

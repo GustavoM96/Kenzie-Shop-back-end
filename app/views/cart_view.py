@@ -1,17 +1,9 @@
-from collections import defaultdict
 from flask import jsonify, make_response, request
-from flask_restful import Resource, reqparse
-from app.models.cart_model import CartModel
-from app.models.product_model import ProductModel
-from app.models.carts_products_model import CartProductModel
-from app.models.customer_model import CustomerModel
-from app.services.entity_services import EntityServices
+from flask_restful import Resource
 from http import HTTPStatus
 from sqlalchemy.exc import IntegrityError
 from app.exc import NotFoundEntityError
-from app.services.helper import message_integrety_error
-from datetime import datetime
-from app.services.auth_service import admin_required, customer_required
+from app.services.auth_service import customer_required
 from app.services.cart_service import CartServices
 from sqlalchemy.exc import DataError
 

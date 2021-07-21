@@ -2,11 +2,10 @@ from flask_restful import Resource, reqparse
 from http import HTTPStatus
 from app.models.product_model import ProductModel
 from app.services.entity_services import EntityServices
-from app.services.helper import message_integrety_error
 from flask import jsonify, make_response
 from datetime import datetime
 from sqlalchemy.exc import IntegrityError
-from app.services.auth_service import admin_required, customer_required
+from app.services.auth_service import admin_required
 from app.exc import NotFoundEntityError
 from sqlalchemy.exc import DataError
 
