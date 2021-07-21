@@ -25,7 +25,9 @@ def init_app(app: Flask) -> None:
     )
 
     api.add_resource(
-        OrderProductResource, "/customers/<int:customer_id>/orders", endpoint="order"
+        OrderProductResource,
+        "/customers/<int:customer_id>/addresses/<int:address_id>/orders",
+        endpoint="order",
     )
     api.add_resource(
         OrderIdProductResource,
