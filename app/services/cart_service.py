@@ -29,23 +29,22 @@ class CartServices:
     @staticmethod
     def get_cart(customer_id: int) -> dict:
         customer = EntityServices.get_entity_by_id(CustomerModel, customer_id)
+        cart = customer.cart
 
         try:
-            list_products = EntityServices.get_all_entity_by_keys(
-                CartProductModel, cart_id=customer.cart.id
-            )
-
             cart_dict = {
-                "products": list_products,
-                "total_price": customer.cart.total_price,
-                "is_empty": customer.cart.is_empty,
+                "id": cart.id,
+                "total_price": cart.total_price,
+                "is_empty": cart.is_empty,
+                "products": cart.carts_products,
             }
             return cart_dict
         except NotFoundEntityError as _:
             return {
+                "id": cart.id,
+                "total_price": cart.total_price,
+                "is_empty": cart.is_empty,
                 "products": [],
-                "total_price": customer.cart.total_price,
-                "is_empty": customer.cart.is_empty,
             }
 
     @classmethod
@@ -78,9 +77,9 @@ class CartServices:
     ) -> CartProductModel:
 
         customer = EntityServices.get_entity_by_id(CustomerModel, customer_id)
-        current_product = EntityServices.get_entity_by_id(ProductModel, product_id)
+        product = EntityServices.get_entity_by_id(ProductModel, product_id)
 
-        updated_price = current_product.current_price * quantity_product
+        updated_price = cls.total_price_product(product.current_price, quantity_product)
 
         data_cart_product: dict = {
             "quantity_product": quantity_product,
@@ -104,14 +103,29 @@ class CartServices:
     def delete_cart_product(cls, customer_id: int, product_id: int) -> None:
 
         customer = EntityServices.get_entity_by_id(CustomerModel, customer_id)
-        customer_cart: CartModel = customer.cart
+        cart = customer.cart
 
         cart_product = EntityServices.get_entity_by_keys(
-            CartProductModel, cart_id=customer_cart.id, product_id=product_id
+            CartProductModel, cart_id=cart.id, product_id=product_id
         )
 
         change_price_to_cart = cart_product.total_price * -1
 
-        cls.update_total_price_cart(customer_cart, change_price_to_cart)
+        cls.update_total_price_cart(cart, change_price_to_cart)
 
         EntityServices.delete_entity(cart_product)
+
+    @classmethod
+    def delete_all_cart_product(cls, customer_id: int) -> None:
+        customer = EntityServices.get_entity_by_id(CustomerModel, customer_id)
+        cart = customer.cart
+
+        cart_product = EntityServices.get_all_entity_by_keys(
+            CartProductModel, cart_id=cart.id
+        )
+
+        change_price_to_cart = cart.total_price * -1
+
+        cls.update_total_price_cart(cart, change_price_to_cart)
+
+        EntityServices.delete_all_entity(cart_product)

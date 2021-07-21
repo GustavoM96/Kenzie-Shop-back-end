@@ -4,7 +4,8 @@ from dataclasses import dataclass
 
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy.sql.schema import ForeignKey
-from sqlalchemy import Column, Integer,Float
+from sqlalchemy import Column, Integer, Float
+from flask_sqlalchemy.model import Model
 
 
 @dataclass
@@ -13,6 +14,9 @@ class OrderProductModel(db.Model):
     sold_price: float
     quantity_product: int
     total_price: float
+    order_id: int
+    product_id: int
+    product: Model
 
     __tablename__ = "orders_products"
 
@@ -23,5 +27,5 @@ class OrderProductModel(db.Model):
     order_id = Column(Integer, ForeignKey("orders.id"))
     product_id = Column(Integer, ForeignKey("products.id"))
 
-    orders = relationship("OrderModel", backref=backref("orders_products"))
-    products = relationship("ProductModel", backref=backref("orders_products"))
+    order = relationship("OrderModel", backref=backref("orders_products"))
+    product = relationship("ProductModel", backref=backref("orders_products"))
