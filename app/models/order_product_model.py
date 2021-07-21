@@ -4,22 +4,22 @@ from dataclasses import dataclass
 
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy.sql.schema import ForeignKey
-from sqlalchemy import Column, Integer
+from sqlalchemy import Column, Integer,Float
 
 
 @dataclass
 class OrderProductModel(db.Model):
     id: int
-    sold_price: int
-    product_quantity: int
-    total_price: str
+    sold_price: float
+    quantity_product: int
+    total_price: float
 
     __tablename__ = "orders_products"
 
     id = Column(Integer, primary_key=True)
-    sold_price = Column(Integer, nullable=False)
-    product_quantity = Column(Integer, nullable=False)
-    total_price = Column(Integer, nullable=False)
+    sold_price = Column(Float, nullable=False)
+    quantity_product = Column(Integer, nullable=False)
+    total_price = Column(Float, nullable=False)
     order_id = Column(Integer, ForeignKey("orders.id"))
     product_id = Column(Integer, ForeignKey("products.id"))
 

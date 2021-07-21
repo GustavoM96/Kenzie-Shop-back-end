@@ -51,6 +51,14 @@ class EntityServices:
         return entity
 
     @staticmethod
+    def create_all_entity(model: Model, data_list: list) -> Model:
+        list_entity = [model(**data) for data in data_list]
+
+        add_all_commit(list_entity)
+
+        return list_entity
+
+    @staticmethod
     def update_entity(entity: Model, data: dict) -> Model:
         update_entity = entity
 
