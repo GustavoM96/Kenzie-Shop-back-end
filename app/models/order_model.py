@@ -14,24 +14,21 @@ class OrderModel(db.Model):
     invoice_url: str
     was_paid: bool
     total_price: int
-    total:int 
     created_at: datetime
     payment_type: str
     payment_day: datetime
 
-    __tablename__ = 'orders'
+    __tablename__ = "orders"
 
     id = Column(Integer, primary_key=True)
     invoice_url = Column(String)
-    was_paid = Column(Boolean, nullable=False)
+    was_paid = Column(Boolean, default=False, nullable=False)
     total_price = Column(Integer, nullable=False)
-    total = Column(Integer, nullable=False)
     created_at = Column(TIMESTAMP, default=datetime.now())
-    customer_id = Column(Integer, ForeignKey('customers.id'))
-    address_id = Column(Integer, ForeignKey('addresses.id'))
+    customer_id = Column(Integer, ForeignKey("customers.id"))
+    address_id = Column(Integer, ForeignKey("addresses.id"))
     payment_type = Column(String(20))
     payment_day = Column(TIMESTAMP)
 
     customers = relationship("CustomerModel", backref=backref("orders"))
     addresses = relationship("AddressModel", backref=backref("orders"))
-        

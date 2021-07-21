@@ -54,7 +54,9 @@ class CartProductResource(Resource):
         quantity_product = int(request.args.get("quantity_product", 0))
 
         if not quantity_product:
-            return {"error": str(error.orig)}, HTTPStatus.UNPROCESSABLE_ENTITY
+            return {
+                "error": "there is not parameter Url (quantity_product)"
+            }, HTTPStatus.UNPROCESSABLE_ENTITY
 
         try:
             updated_cart_product = CartServices.update_cart_product(
