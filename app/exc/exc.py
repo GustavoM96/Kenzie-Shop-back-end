@@ -1,5 +1,4 @@
 from flask_sqlalchemy.model import Model
-from sqlalchemy.exc import IntegrityError
 
 
 class NotFoundEntityError(Exception):

@@ -4,7 +4,6 @@ from app.services.entity_services import EntityServices
 from app.models.admin_model import AdminModel
 from flask import jsonify, make_response
 from sqlalchemy.exc import IntegrityError
-from app.services.helper import message_integrety_error
 from sqlalchemy.exc import DataError
 
 

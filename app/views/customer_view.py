@@ -7,7 +7,6 @@ from app.services.customer_service import CustomerServices
 from app.services.auth_service import admin_required, customer_required
 from sqlalchemy.exc import IntegrityError
 from app.exc import NotFoundEntityError
-from app.services.helper import message_integrety_error
 from sqlalchemy.exc import DataError
 
 

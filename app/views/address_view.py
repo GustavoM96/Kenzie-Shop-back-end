@@ -7,11 +7,9 @@ from app.services.entity_services import EntityServices
 from app.models.address_model import AddressModel
 
 from flask import jsonify, make_response
-from flask_jwt_extended import jwt_required
 from sqlalchemy.exc import DataError
 
 from app.exc import NotFoundEntityError
-from app.services.helper import message_integrety_error
 from app.services.auth_service import customer_required, admin_required
 
 

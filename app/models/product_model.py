@@ -2,7 +2,6 @@ from sqlalchemy import Column, String, Integer, Float, Text, TIMESTAMP
 from app.config.database import db
 from dataclasses import dataclass
 from datetime import datetime
-from sqlalchemy.schema import ForeignKey
 
 
 @dataclass

@@ -1,6 +1,5 @@
 from app.config.database import db
 from sqlalchemy import Column, Integer, Boolean, Float
-from sqlalchemy.orm import relationship, backref
 
 from dataclasses import dataclass
 

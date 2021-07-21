@@ -4,7 +4,6 @@ from app.services.entity_services import EntityServices
 from app.models.customer_model import CustomerModel
 from app.models.admin_model import AdminModel
 from flask_jwt_extended import create_access_token
-from flask import jsonify
 from app.exc import NotFoundEntityError, PasswordError
 from sqlalchemy.exc import DataError
 

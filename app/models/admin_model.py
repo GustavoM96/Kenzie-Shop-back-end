@@ -14,7 +14,7 @@ class AdminModel(db.Model):
     __tablename__ = "admin"
 
     id = Column(Integer, primary_key=True)
-    name = Column(String(126), nullable=False)  # this one is Silvão
+    name = Column(String(126), nullable=False)
     email = Column(String(126), nullable=False, unique=True)
     password_hash = Column(String(522), nullable=False)
 
