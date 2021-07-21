@@ -9,3 +9,4 @@ from .address_view import (
 )
 from .auth_view import AuthCustomerResource, AuthAdminResource
 from .admin_view import AdminResource
+from .order_view import OrderIdProductResource, OrderProductResource

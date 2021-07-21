@@ -77,3 +77,12 @@ class EntityServices:
         delete_commit(entity)
 
         return None
+
+    @staticmethod
+    def delete_all_entity(list_entity: list[Model]) -> None:
+        deleted_list_entity = list_entity
+
+        for entity in list_entity:
+            delete_commit(entity)
+
+        return None

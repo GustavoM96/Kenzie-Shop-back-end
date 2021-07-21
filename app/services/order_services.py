@@ -40,3 +40,20 @@ class OrderServices:
         order_product = EntityServices.create_all_entity(OrderProductModel, list_data)
 
         return order_product
+
+    @staticmethod
+    def get_order_by_id(order_id: int):
+
+        order = EntityServices.get_entity_by_id(OrderModel, order_id)
+
+        order_dict = {
+            "id": order.id,
+            "invoice_url": order.invoice_url,
+            "total_price": order.total_price,
+            "was_paid": order.was_paid,
+            "payment_type": order.payment_type,
+            "payment_day": order.payment_day,
+            "products": order.orders_products,
+        }
+
+        return order_dict
