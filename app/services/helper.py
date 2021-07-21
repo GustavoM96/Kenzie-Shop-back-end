@@ -1,7 +1,6 @@
 from flask_sqlalchemy.model import Model
 from flask import current_app
 from app.config.database import db
-from datetime import datetime
 
 
 def add_commit(model: Model) -> None:
