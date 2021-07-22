@@ -22,11 +22,14 @@ class EmailResource(Resource):
         address_id: int,
         order_id: int,
     ) -> None:
+        try:
+            customer = EntityServices.get_entity_by_id(CustomerModel, customer_id)
+            address = EntityServices.get_entity_by_id(AddressModel, address_id)
+            order = EntityServices.get_entity_by_id(OrderModel, order_id)
 
-        customer = EntityServices.get_entity_by_id(CustomerModel, customer_id)
-        address = EntityServices.get_entity_by_id(AddressModel, address_id)
-        order = EntityServices.get_entity_by_id(OrderModel, order_id)
-
+        except NotFoundEntityError as error:
+            return make_response(error.message, HTTPStatus.NOT_FOUND)
+            
         dict_to_request = {
             "personalizations": [
                 {
