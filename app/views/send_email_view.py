@@ -12,6 +12,8 @@ from sqlalchemy.exc import IntegrityError
 from app.services.auth_service import admin_required, customer_required
 from app.exc import NotFoundEntityError
 from sqlalchemy.exc import DataError
+from sqlalchemy.exc import IntegrityError
+from app.exc import NotFoundEntityError
 
 
 class EmailResource(Resource):
@@ -29,7 +31,7 @@ class EmailResource(Resource):
 
         except NotFoundEntityError as error:
             return make_response(error.message, HTTPStatus.NOT_FOUND)
-            
+
         dict_to_request = {
             "personalizations": [
                 {
