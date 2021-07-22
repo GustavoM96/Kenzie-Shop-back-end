@@ -20,6 +20,8 @@ class OrderProductResource(Resource):
 
         return make_response(jsonify(list_order), HTTPStatus.OK)
 
+
+class OrderProductAddressResource(Resource):
     @customer_required()
     def post(self, customer_id: int, address_id: id):
 
