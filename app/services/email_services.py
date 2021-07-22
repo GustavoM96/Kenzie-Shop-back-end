@@ -25,7 +25,6 @@ class EmailService:
         customer = EntityServices.get_entity_by_id(CustomerModel, customer_id)
         address = EntityServices.get_entity_by_id(AddressModel, address_id)
         order: OrderModel = EntityServices.get_entity_by_id(OrderModel, order_id)
-        print(order.orders_products[0].product.name)
 
         number = address.number
         complement = address.complement
