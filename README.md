@@ -4,96 +4,75 @@
 
 
 # 🥳 Rotas:
-[![CUSTOMER](https://img.shields.io/badge/customer%20-%23323330.svg?&style=for-the-badge&logo=customer&logoColor=black&color=FF)](#customer)
-[![ADMIN](https://img.shields.io/badge/admin%20-%23323330.svg?&style=for-the-badge&logo=cart&logoColor=black&color=AAA)](#admin)
-[![AUTH](https://img.shields.io/badge/auth%20-%23323330.svg?&style=for-the-badge&logo=cart&logoColor=black&color=FDA)](#auth)
-[![ADDRESS](https://img.shields.io/badge/Address%20-%23323330.svg?&style=for-the-badge&logo=customer&logoColor=black&color=FFA)](#address)
-[![PRODUCTS](https://img.shields.io/badge/Products%20-%23323330.svg?&style=for-the-badge&logo=product&logoColor=black&color=D2D)](#product)
-[![CART](https://img.shields.io/badge/cart%20-%23323330.svg?&style=for-the-badge&logo=cart&logoColor=black&color=AFA)](#cart)
+[![Validando](https://img.shields.io/badge/Validando%20-%23323330.svg?&style=for-the-badge&logo=Criando&logoColor=black&color=dDF)](#validando)
+[![Criando](https://img.shields.io/badge/Criando%20-%23323330.svg?&style=for-the-badge&logo=Criando&logoColor=black&color=FF)](#criando)
+[![Buscando](https://img.shields.io/badge/Buscando%20-%23323330.svg?&style=for-the-badge&logo=Buscando&logoColor=black&color=AAA)](#buscando)
+[![Alterando](https://img.shields.io/badge/Alterando%20-%23323330.svg?&style=for-the-badge&logo=Alterando&logoColor=black&color=FDA)](#alterando)
+[![Deletando](https://img.shields.io/badge/Deletando%20-%23323330.svg?&style=for-the-badge&logo=customer&logoColor=black&color=FFA)](#deletando)
 
+# 👾 Validando Acessos
 
+<h2 id="validando" style="font-size:20px; color:#cdd; font-weight:bold">Para ter acesso a maior parte dos componentes precisamos validar a entrada</h2>
 
-<h1 id="customer">👤 Customer</h1>
-
-## Requisições GET
-
-<br>
-
-```
-Method - GET (ADMIN AUTH)
-
-Endpoint - /customer
-
-Body - No Content
-
-Request - 200 
-```
-> <font size="4" color="#00ff2a"> Retornar todos os usuários cadastrados  </font>
-
-<br>
-
-```
-Method - GET 
-
-Endpoint - /customer/<customer_id>
-
-Header - Authorization: Bearer <token_user>
-
-Body - No Content
-
-Request - 200 
-```
-> <font size="4" color="#00ff2a"> Retornar o usuário passado pelo customer_id cadastrado </font>
-
-<br>
-
-## Requisições POST
+<p style="font-size:18px; color:#00ff2a; font-weight:bold">Validação do admin</p>
 
 ```
 Method - POST
 
-Endpoint - /customer
+Endpoint - /auth/admins
 
 Body - {
-	"name": "Astolfo",
-	"last_name": "Fagundes",
-	"email": "astolfo@gmail.com",
+	"email": "admin@gmail.com",
 	"password": "123456"
 }
 
-Request - 201
-```
-> <font size="4" color="#00ff2a"> Criação de um usuário referente ao body json passado </font>
-
-<br>
-
-## Requisições PATCH
-
-```
-Method - PATCH
-
-Endpoint - /customer/<customer_id>
-
-Header - Authorization: Bearer <token_user>
-
-Body - {
-		"name": "Rodoifo"
-	}
-
 Request - 200
 ```
-> <font size="4" color="#00ff2a"> Alteração de informações do usuário respectivo ao customer_id podendo passar uma ou mais parametros pelo body </font>
+> <p style="font-size:16px;color:#00ff2a"> Retornando o token de acesso do admin </p>
 
-<br>
+</br>
+<img src="https://i.ibb.co/hHL72Yz/01.png" alt="01" style="width:100%; border:solid 1px green, margin:0 auto;"/>
 
-<h1 id="admin">😎 Admin</h1>
+</br>
 
-## Requisições POST
+</br>
+
+<p style="font-size:18px; color:#00ff2a; font-weight:bold">Validação do usuário</p>
 
 ```
 Method - POST
 
-Endpoint - /admin
+Endpoint - /auth/customers
+
+Body - {
+	"email": "customer@gmail.com",
+	"password": "123456"
+}
+
+Request - 200
+```
+> <p style="font-size:16px;color:#00ff2a"> Retornando o token de acesso do usuário </p>
+
+</br>
+
+<img src="https://i.ibb.co/VxfBF5M/02.png" style="width:100%; border:solid 1px green, margin:0 auto;"/>
+
+</br>
+
+</br>
+
+# 👤 Criando Elementos
+
+<h2 style="font-size:20px; color:#cdd; font-weight:bold; text-align:center">Aqui está todas as informações que você poderá inserir na API</h2>
+
+</br>
+
+<p style="font-size:18px; color:#00ff2a; font-weight:bold; text-align:center">Criando um admin</p>
+
+```
+Method - POST
+
+Endpoint - /admins
 
 Body - {
 	"name": "Admin",
@@ -103,88 +82,42 @@ Body - {
 
 Request - 201
 ```
-> <font size="4" color="#00ff2a"> Criação do Admin </font>
-
-
-<br>
-
-<h1 id="auth">👾 Auth</h1>
-
-## Requisições POST
-
-```
-Method - POST
-
-Endpoint - /auth/admin
-
-Body - {
-	"email": "admin@gmail.com",
-	"password": "123456"
-}
-
-Request - 200
-```
-> <font size="4" color="#00ff2a"> Validação de admin, retornando o token </font>
+> <p style="font-size:16px;color:#00ff2a; text-align:center">Retorna admin referente as informações passada por body</p>
 
 </br>
 
+<img src="https://i.ibb.co/bF06wJM/03.png" style="width:100%; border:solid 1px green, margin:0 auto;"/>
+
+<p style="font-size:18px; color:#00ff2a; font-weight:bold; text-align:center">Criando um usuário</p>
+
 ```
 Method - POST
 
-Endpoint - /auth/customer
+Endpoint - /customers
 
 Body - {
-	"email": "customer@gmail.com",
+	"name": "Silvio",
+	"last_name": "Romano",
+	"email": "Silvio@gmail.com",
 	"password": "123456"
 }
 
-Request - 200
+Request - 201
 ```
-> <font size="4" color="#00ff2a"> Validação de usuário, retornando o token </font>
+> <p style="font-size:16px;color:#00ff2a; text-align:center">Retorna usuário referente as informações passada por body</p>
 
 </br>
 
-<h1 id="address">🗺 Address</h1>
+<img src="https://i.ibb.co/VYrLjNy/04.png" style="width:100%; border:solid 1px green, margin:0 auto;"/>
 
-## Requisições GET
+</br>
 
-<br>
+<p style="font-size:18px; color:#00ff2a; font-weight:bold; text-align:center">Adicionando Endereço ao usuário</p>
 
-```
-Method - GET 
-
-Endpoint - /customer/<customer_id>/address
-
-Header - Authorization: Bearer <token_user>
-
-Body - No Content
-
-Request - 200 
-```
-> <font size="4" color="#00ff2a"> Retornar apenas os endereços do usuário respectivo  </font>
-
-<br>
-
-```
-Method - GET 
-
-Endpoint - /address/<address_id>
-
-Header - Authorization: Bearer <token_user>
-
-Body - No Content
-
-Request - 200 
-```
-> <font size="4" color="#00ff2a"> Retornar apenas um endereço especifico  </font>
-
-<br>
-
-## Requisições POST
 ```
 Method - POST
 
-Endpoint - /customer/<customer_id>/address
+Endpoint - /customers/<int:customer_id>/addresses
 
 Header - Authorization: Bearer <token_user>
 
@@ -199,62 +132,20 @@ Body - {
 
 Request - 201
 ```
+> <p style="font-size:16px;color:#00ff2a; text-align:center">Retorna endereço referente ao body</p>
 
-> <font size="4" color="#00ff2a"> Creação do endereço relacionando ao usuário respectivo </font>
+<img src="https://i.ibb.co/NjHtm5V/05.png" style="width:100%; border:solid 1px green, margin:0 auto;"/>
 
-<br>
 
-## Requisições PATCH
-```
-Method - PATCH
+</br>
 
-Endpoint - /address/<address_id>
 
-Header - Authorization: Bearer <token_user>
+<p style="font-size:18px; color:#00ff2a; font-weight:bold; text-align:center">Adicionando um produto ao sistema (Apenas Admin)</p>
 
-Body - {
-		"name": "Rua Fragoso perreira frantz"	
-	}
-
-Request - 200
-```
-> <font size="4" color="#00ff2a"> Alteração de informações do endereço respectivo ao address_id podendo passar uma ou mais parametros pelo body</font>
-
-<br>
-<h1 id="product">📦  Products</h1>
-
-## Requisições GET
-```
-Method - GET 
-
-Endpoint - /product
-
-Body - No Content
-
-Request - 200 
-```
-> <font size="4" color="#00ff2a"> Retornar todos os produtos cadastrados </font>
-
-<br>
-
-```
-Method - GET 
-
-Endpoint - /product/<product_id>
-
-Body - No Content
-
-Request - 200 
-```
-> <font size="4" color="#00ff2a"> Retornar o produto especifico passado pelo product_id </font>
-
-<br>
- 
-## Requisições POST (ADMIN)
 ```
 Method - POST (ADMIN)
 
-Endpoint - /product
+Endpoint - /products
 
 Header - Authorization: Bearer <token_admin>
 
@@ -269,53 +160,109 @@ Body - {
 
 Request - 201
 ```
-> <font size="4" color="#00ff2a"> Alteração de informações do endereço respectivo ao address_id podendo passar uma ou mais parametros pelo body</font>
+> <p style="font-size:16px;color:#00ff2a; text-align:center">Retorna produto referente ao body</p>
 
-<br>
+<img src="https://i.ibb.co/ZxzG2K2/06.png" style="width:100%; border:solid 1px green, margin:0 auto;"/>
 
-## Requisições PATCH (ADMIN) 
+</br>
+
+
+<p style="font-size:18px; color:#00ff2a; font-weight:bold; text-align:center">Adicionar produto ao carinho do usuário</p>
+
 ```
-Method - PATCH (ADMIN)
+Method - POST
 
-Endpoint - /product/<product_id>
+Endpoint - /customers/<int:customer_id>/cart/products/<int:product_id>
 
-Header - Authorization: Bearer <token_admin>
+Header - Authorization: Bearer <token_user>
+
+Body - No Content
+
+Request - 201
+```
+
+> <p style="font-size:16px;color:#00ff2a; text-align:center">Retorno do produto adicionado</p>
+
+<img src="https://i.ibb.co/8YMsRsG/07.png" style="width:100%; border:solid 1px green, margin:0 auto;"/>
+
+
+
+<p style="font-size:18px; color:#00ff2a; font-weight:bold; text-align:center">Criando Ordem ao comprar item</p>
+
+```
+Method - POST
+
+Endpoint - /customers/<int:customer_id>/orders
+
+Header - Authorization: Bearer <token_user>
 
 Body - {
-	"description":"Camiseta Preta G",
-	"current_price":55
-
+	"invoice_url": https://url_tested_matrix;
+	"payment_type": Cartão de Credito;
 }
 
 Request - 201
 ```
-> <font size="4" color="#00ff2a"> Alteração de informações do produto respectivo ao product_id podendo passar uma ou mais parametros pelo body</font>
 
-</br>
+> <p style="font-size:16px;color:#00ff2a; text-align:center">Retorno a ordem da compra</p>
 
-## Requisições DELETE (ADMIN) 
+<img src="https://i.ibb.co/ZgX0D4J/Address-Order.png" style="width:100%; border:solid 1px green, margin:0 auto;"/>
+
+
+<p style="font-size:18px; color:#00ff2a; font-weight:bold; text-align:center">Enviando Email da compra</p>
+
 ```
-Method - DELETE (ADMIN)
+Method - POST
 
-Endpoint - /product/<product_id>
+Endpoint - /customers/<int:customer_id>/addresses/<int:address_id>/orders/<int:order_id>/email
 
-Header - Authorization: Bearer <token_admin>
+Header - Authorization: Bearer <token_user>
 
 Body - No Content
 
-Request - 200
+Request - 201
 ```
-> <font size="4" color="#00ff2a">Deletando produto referente ao product_id</font>
+
+> <p style="font-size:16px;color:#00ff2a; text-align:center">Envia Email para o usuário da compra</p>
+
+<img src="https://i.ibb.co/TtQvKK5/email.png" style="width:100%; border:solid 1px green, margin:0 auto;"/>
 
 </br>
 
-<h1 id="cart">🛒 Cart</h1>
+</br>
 
-## Requisições GET
+# 👾 Pegando elementos da API
+
+
+<h2 style="font-size:20px; color:#cdd; font-weight:bold; text-align:center">Aqui estão todos os elementos que podem ser buscados na API</h2>
+
+
+<p style="font-size:18px; color:#00ff2a; font-weight:bold; text-align:center">Trazendo todos os usuários cadastrados (APENAS ADMINs)</p>
+
+
+```
+Method - GET (ADMIN)
+
+Endpoint - /customers
+
+Body - No Content
+
+Request - 200 
+```
+
+> <p style="font-size:16px;color:#00ff2a; text-align:center">Retorna todos os usuários cadastrados</p>
+
+<img src="https://i.ibb.co/rkT4wmh/09.png" style="width:100%; border:solid 1px green, margin:0 auto;"/>
+
+</br>
+
+
+<p style="font-size:18px; color:#00ff2a; font-weight:bold; text-align:center">Trazendo usuário respectivo</p>
+
 ```
 Method - GET 
 
-Endpoint - /customers/<customer_id>/cart/
+Endpoint - /customers/<int:customer_id>
 
 Header - Authorization: Bearer <token_user>
 
@@ -323,16 +270,198 @@ Body - No Content
 
 Request - 200 
 ```
-> <font size="4" color="#00ff2a"> Retornar todos os produtos do carrinho referente ao usuário </font>
+
+> <p style="font-size:16px;color:#00ff2a; text-align:center">Retorna um usuário respectivo</p>
+
+<img src="https://i.ibb.co/PTMTsM7/10.png" style="width:100%; border:solid 1px green, margin:0 auto;"/>
 
 </br>
 
-## Requisições POST
+<p style="font-size:18px; color:#00ff2a; font-weight:bold; text-align:center">Trazendo todos os endereços de um usuário </p>
+
 
 ```
-Method - POST
+Method - GET 
 
-Endpoint - /customers/<customer_id>/cart/<product_id>
+Endpoint - /customers/<int:customer_id>/addresses
+
+Header - Authorization: Bearer <token_user>
+
+Body - No Content
+
+Request - 200 
+```
+
+> <p style="font-size:16px;color:#00ff2a; text-align:center">Retorna todos os endereços cadastrados de um usuário</p>
+
+<img src="https://i.ibb.co/S7p3mGv/11.png" style="width:100%; border:solid 1px green, margin:0 auto;"/>
+
+</br>
+
+<p style="font-size:18px; color:#00ff2a; font-weight:bold; text-align:center">Trazendo endereços especificos dos usuários </p>
+
+```
+Method - GET 
+
+Endpoint - /customers/<int:customer_id>/addresses/<int:address_id>
+
+Header - Authorization: Bearer <token_user>
+
+Body - No Content
+
+Request - 200 
+```
+
+
+> <p style="font-size:16px;color:#00ff2a; text-align:center">Retorno</p>
+
+<img src="https://i.ibb.co/xCvRvyK/adresss.png" style="width:100%; border:solid 1px green, margin:0 auto;"/>
+
+</br>
+
+
+<p style="font-size:18px; color:#00ff2a; font-weight:bold; text-align:center">Trazendo todos os endereços (APENAS ADMINs) </p>
+
+
+
+
+```
+Method - GET (ADMIN)
+
+Endpoint - /addresses
+
+Header - Authorization: Bearer <token_user>
+
+Body - No Content
+
+Request - 200 
+```
+
+> <p style="font-size:16px;color:#00ff2a; text-align:center">Retorno</p>
+
+<img src="https://i.ibb.co/L54JKyD/12.png" style="width:100%; border:solid 1px green, margin:0 auto;"/>
+
+</br>
+
+
+<p style="font-size:18px; color:#00ff2a; font-weight:bold; text-align:center">Trazendo endereço especifico (APENAS ADMINs) </p>
+
+
+```
+Method - GET (ADMIN)
+
+Endpoint - /addresses/<int:address_id>
+
+Header - Authorization: Bearer <token_user>
+
+Body - No Content
+
+Request - 200 
+```
+
+> <p style="font-size:16px;color:#00ff2a; text-align:center">Retorno</p>
+
+<img src="https://i.ibb.co/g77bQKm/13.png" style="width:100%; border:solid 1px green, margin:0 auto;"/>
+
+
+# 👾 Modificando Elementos da API
+
+
+<h2 style="font-size:20px; color:#cdd; font-weight:bold; text-align:center">Aqui estão todos os elementos que podem ser Modificados na API</h2>
+
+
+</br>
+
+
+<p style="font-size:18px; color:#00ff2a; font-weight:bold; text-align:center">Fazendo alterações no usuário </p>
+
+
+```
+Method - PATCH
+
+Endpoint - /customers/<int:customer_id>
+
+Header - Authorization: Bearer <token_user>
+
+Body - {
+		"name": "Romano",
+		"last_name": "Silvio",
+		"email":"Romano@gmail.com",
+	}
+
+Request - 200
+```
+
+> <p style="font-size:16px;color:#00ff2a; text-align:center">Devem passar pelo menos um item no body, quantidade opcional</p>
+
+<img src="https://i.ibb.co/VVGms5s/14.png" style="width:100%; border:solid 1px green, margin:0 auto;"/>
+
+
+</br>
+
+<p style="font-size:18px; color:#00ff2a; font-weight:bold; text-align:center">Fazendo alterações no endereço</p>
+
+
+```
+Method - PATCH
+
+Endpoint - /customers/<int:customer_id>/addresses/<int:address_id>
+
+Header - Authorization: Bearer <token_user>
+
+Body - {
+		"name": "Rua Dom Torreto",
+		"number": 857,
+		"complement": "Apartamento", 
+		"zipcode": "12345-698", 		
+		"city": "Curitiba",		
+		"state": "PR"		
+	}
+
+Request - 200
+```
+
+> <p style="font-size:16px;color:#00ff2a; text-align:center">Devem passar pelo menos um item no body, quantidade opcional</p>
+
+<img src="https://i.ibb.co/Xz19pSB/15.png" style="width:100%; border:solid 1px green, margin:0 auto;"/>
+
+
+</br>
+
+<p style="font-size:18px; color:#00ff2a; font-weight:bold; text-align:center">Fazendo alterações no produto (APENAS ADMINs)</p>
+
+```
+Method - PATCH (ADMIN)
+
+Endpoint - /products/<int:product_id>
+
+Header - Authorization: Bearer <token_admin>
+
+Body - {
+	"name":"Camiseta G",
+	"description":"Camiseta Laranja",
+	"current_price":44.99,
+	"discount":22,
+	"amount_products":110,
+	"image_url":"https://img.elo7.com.br/product/main/2256D07/camiseta-branca-malha-fria-camiseta-para-trabalho.jpg"
+}
+
+Request - 201
+```
+
+> <p style="font-size:16px;color:#00ff2a; text-align:center">Devem passar pelo menos um item no body, quantidade opcional</p>
+
+<img src="https://i.ibb.co/5v3jzSK/16.png" style="width:100%; border:solid 1px green, margin:0 auto;"/>
+
+
+</br>
+
+<p style="font-size:18px; color:#00ff2a; font-weight:bold; text-align:center">Fazendo alterações na quantidade de um produto no cart</p>
+
+```
+Method - PATCH 
+
+Endpoint - /customers/<int:customer_id>/cart/products/<int:product_id>?quantity_product=value
 
 Header - Authorization: Bearer <token_user>
 
@@ -340,7 +469,76 @@ Body - No Content
 
 Request - 201
 ```
-> <font size="4" color="#00ff2a"> Adicionar um produto ao carrinho do usuário referente ao customer_id e o produto referente ao product_id  </font>
+
+> <p style="font-size:16px;color:#00ff2a; text-align:center">Valor passado por url quantity_product</p>
+
+<img src="https://i.ibb.co/PYVWwkt/17.png" style="width:300%; border:solid 1px green, margin:0 auto;"/>
 
 
 
+<p style="font-size:18px; color:#00ff2a; font-weight:bold; text-align:center">Fazendo alteração no order</p>
+
+```
+Method - PATCH 
+
+Endpoint - /customers/<int:customer_id>/orders/<int:order_id>
+
+Header - Authorization: Bearer <token_user>
+
+Body - {
+	"payment_type": "Boleto",
+	"invoice_url": "https://fiscal_boletod"
+}
+
+Request - 201
+```
+
+> <p style="font-size:16px;color:#00ff2a; text-align:center">Devem passar pelo menos um item no body, quantidade opcional</p>
+
+<img src="https://i.ibb.co/s9V2LYN/orders.png" style="width:100%; border:solid 1px green, margin:0 auto;"/>
+
+# 👾 Deletando elementos da API
+
+
+<h2 style="font-size:20px; color:#cdd; font-weight:bold; text-align:center">Aqui estão todos os elementos que podem ser deletados da API</h2>
+
+</br>
+
+<p style="font-size:18px; color:#00ff2a; font-weight:bold; text-align:center">Deletando todos os produtos do carrinho de um usuário </p>
+
+
+```
+Method - DELETE
+
+Endpoint - /customers/<int:customer_id>/cart
+
+Header - Authorization: Bearer <token_user>
+
+Body - no content
+
+Request - 204
+```
+
+> <p style="font-size:16px;color:#00ff2a; text-align:center">Sem Retorno</p>
+
+<img src="https://i.ibb.co/rsmdyhG/delete-all-cart.png" style="width:100%; border:solid 1px green, margin:0 auto;"/>
+
+
+<p style="font-size:18px; color:#00ff2a; font-weight:bold; text-align:center">Deletando Produto especifico do carrinho de um usuário </p>
+
+
+```
+Method - DELETE
+
+Endpoint - /customers/<int:customer_id>/cart/products/<int:product_id>
+
+Header - Authorization: Bearer <token_user>
+
+Body - no content
+
+Request - 204
+```
+
+> <p style="font-size:16px;color:#00ff2a; text-align:center">Sem Retorno</p>
+
+<img src="https://i.ibb.co/Xb6qBVL/Delete-cart-one.png" style="width:100%; border:solid 1px green, margin:0 auto;"/>

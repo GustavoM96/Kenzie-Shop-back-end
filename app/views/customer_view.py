@@ -4,11 +4,11 @@ from app.services.entity_services import EntityServices
 from app.models.customer_model import CustomerModel
 from flask import jsonify, make_response
 from app.services.customer_service import CustomerServices
-from app.services.auth_admin_service import admin_required
-from flask_jwt_extended import jwt_required
+from app.services.auth_service import admin_required, customer_required
 from sqlalchemy.exc import IntegrityError
 from app.exc import NotFoundEntityError
-from app.services.helper import message_integrety_error
+from sqlalchemy.exc import DataError
+from datetime import datetime
 
 
 class CustomerResource(Resource):
@@ -26,11 +26,11 @@ class CustomerResource(Resource):
             created_user = CustomerServices.create_customer(args)
             return make_response(jsonify(created_user), HTTPStatus.CREATED)
 
-        except IntegrityError as _:
-            return (
-                message_integrety_error(CustomerModel),
-                HTTPStatus.UNPROCESSABLE_ENTITY,
-            )
+        except IntegrityError as error:
+            return ({"error": str(error.orig)}, HTTPStatus.UNPROCESSABLE_ENTITY)
+
+        except DataError as error:
+            return {"error": str(error.orig)}, HTTPStatus.UNPROCESSABLE_ENTITY
 
     @admin_required()
     def get(self):
@@ -40,7 +40,7 @@ class CustomerResource(Resource):
 
 
 class CustomerIdResource(Resource):
-    @jwt_required()
+    @customer_required()
     def get(self, customer_id: int):
 
         try:
@@ -50,11 +50,12 @@ class CustomerIdResource(Resource):
         except NotFoundEntityError as error:
             return error.message, HTTPStatus.NOT_FOUND
 
-    @jwt_required()
+    @customer_required()
     def patch(self, customer_id: int):
         parser = reqparse.RequestParser()
 
         parser.add_argument("name", type=str)
+        parser.add_argument("email", type=str)
         parser.add_argument("last_name", type=str)
         parser.add_argument("updated_at", type=datetime, default=datetime.now())
 
@@ -67,3 +68,9 @@ class CustomerIdResource(Resource):
 
         except NotFoundEntityError as error:
             return error.message, HTTPStatus.NOT_FOUND
+
+        except DataError as error:
+            return {"error": str(error.orig)}, HTTPStatus.UNPROCESSABLE_ENTITY
+
+        except IntegrityError as error:
+            return ({"error": str(error.orig)}, HTTPStatus.UNPROCESSABLE_ENTITY)

@@ -33,4 +33,5 @@ class CartProductModel(db.Model):
     created_at = Column(TIMESTAMP, default=datetime.now())
     updated_at = Column(TIMESTAMP, default=datetime.now())
 
-    product = relationship("ProductModel", backref=backref("cart_products"))
+    product = relationship("ProductModel", backref=backref("carts_products"))
+    cart = relationship("CartModel", backref=backref("carts_products"))

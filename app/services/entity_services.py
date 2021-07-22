@@ -4,10 +4,6 @@ from app.exc import NotFoundEntityError
 
 
 class EntityServices:
-    """
-    Esse é um tipo de documentação Python usado no padrão pep8, use o __doc__ e retornará esses dados:
-    Essa classe tem o objetivo de fazer um CRUD de entidades(objetos da classe Model)
-    """
 
     @staticmethod
     def get_all_entity(model: Model) -> list[Model]:
@@ -51,6 +47,14 @@ class EntityServices:
         return entity
 
     @staticmethod
+    def create_all_entity(model: Model, data_list: list) -> Model:
+        list_entity = [model(**data) for data in data_list]
+
+        add_all_commit(list_entity)
+
+        return list_entity
+
+    @staticmethod
     def update_entity(entity: Model, data: dict) -> Model:
         update_entity = entity
 
@@ -67,5 +71,14 @@ class EntityServices:
         deleted_entity = entity
 
         delete_commit(entity)
+
+        return None
+
+    @staticmethod
+    def delete_all_entity(list_entity: list[Model]) -> None:
+        deleted_list_entity = list_entity
+
+        for entity in list_entity:
+            delete_commit(entity)
 
         return None

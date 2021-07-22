@@ -1,5 +1,4 @@
 from flask_sqlalchemy.model import Model
-from sqlalchemy.exc import IntegrityError
 
 
 class NotFoundEntityError(Exception):
@@ -14,5 +13,12 @@ class PasswordError(Exception):
 
     def __init__(self) -> None:
         self.message = self.message_error
+
+        super().__init__(self.message)
+
+
+class DataError(Exception):
+    def __init__(self, model: Model) -> None:
+        self.message = {"error": f"value too long for type {model.__tablename__}"}
 
         super().__init__(self.message)

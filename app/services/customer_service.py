@@ -1,4 +1,3 @@
-from app.services.entity_services import EntityServices
 from app.models.customer_model import CustomerModel
 from app.models.cart_model import CartModel
 

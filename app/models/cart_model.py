@@ -1,6 +1,5 @@
 from app.config.database import db
 from sqlalchemy import Column, Integer, Boolean, Float
-from sqlalchemy.orm import relationship, backref
 
 from dataclasses import dataclass
 
@@ -15,5 +14,5 @@ class CartModel(db.Model):
 
     id = Column(Integer, primary_key=True)
 
-    is_empty = Column(Boolean, nullable=False)
+    is_empty = Column(Boolean, nullable=False, default=True)
     total_price = Column(Float, nullable=False)
