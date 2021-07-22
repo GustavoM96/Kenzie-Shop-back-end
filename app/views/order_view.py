@@ -11,7 +11,6 @@ from app.services.email_services import EmailService
 from sqlalchemy.exc import IntegrityError
 from app.exc import NotFoundEntityError
 
-
 class OrderProductResource(Resource):
     @customer_required()
     def get(self, customer_id: int):

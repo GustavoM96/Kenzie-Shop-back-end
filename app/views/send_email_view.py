@@ -1,19 +1,11 @@
-from flask_restful import Resource, reqparse
-from http import HTTPStatus
+from flask_restful import Resource
 from app.models.customer_model import CustomerModel
 from app.models.address_model import AddressModel
 from app.models.order_model import OrderModel
 import json
 import requests
 from app.services.entity_services import EntityServices
-from flask import jsonify, make_response
-from datetime import datetime
-from sqlalchemy.exc import IntegrityError
-from app.services.auth_service import admin_required, customer_required
-from app.exc import NotFoundEntityError
-from sqlalchemy.exc import DataError
-from sqlalchemy.exc import IntegrityError
-from app.exc import NotFoundEntityError
+from app.services.auth_service import customer_required
 from environs import Env
 
 env = Env()
