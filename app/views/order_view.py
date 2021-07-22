@@ -8,6 +8,8 @@ from flask import jsonify, make_response
 from app.services.auth_service import customer_required
 from app.services.cart_service import CartServices
 from app.services.email_services import EmailService
+from sqlalchemy.exc import IntegrityError
+from app.exc import NotFoundEntityError
 
 class OrderProductResource(Resource):
     @customer_required()
