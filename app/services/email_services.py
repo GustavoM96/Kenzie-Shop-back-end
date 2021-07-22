@@ -36,7 +36,7 @@ class EmailService:
             complement = "sem complemento"
 
         list_product = [
-            f"{data.product.name} R$ {data.sold_price} X {data.quantity_product} = {data.sold_price *data.quantity_product}"
+            f"{data.product.name} R$ {data.sold_price} X {data.quantity_product} = {data.sold_price *data.quantity_product} => Total: R$ {order.total_price}"
             for data in order.orders_products
         ]
 
