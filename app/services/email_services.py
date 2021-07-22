@@ -35,14 +35,16 @@ class EmailService:
             complement = "sem complemento"
 
         list_product = [
-            f"{data.product.name} R$ {data.sold_price} X {data.quantity_product} = {data.sold_price *data.quantity_product} => Total: R$ {order.total_price}"
+            f"{data.product.name} R$ {data.sold_price} X {data.quantity_product} = {data.sold_price *data.quantity_product}"
             for data in order.orders_products
         ]
+
+        list_product.append(f"Total: R$ {order.total_price}")
 
         dict_to_request = {
             "personalizations": [
                 {
-                    "to": [{"email": "gustavo.hmessias96@gmail.com"}],
+                    "to": [{"email": customer.email}],
                     "dynamic_template_data": {
                         "subject": f"Compra do pedido nº{order.id} na Kenzie Shop",
                         "name": customer.name,
@@ -68,7 +70,8 @@ class EmailService:
             data=json.dumps({**dict_to_request}),
             headers={
                 "Content-Type": "application/json",
-                "Authorization": "Bearer "
-                + "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",
+                "Authorization": "Bearer " + env("TOKEN_EMAIL"),
             },
         )
+
+        return response.text, response.status_code
