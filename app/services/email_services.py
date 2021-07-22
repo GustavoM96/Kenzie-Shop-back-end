@@ -14,22 +14,31 @@ from app.exc import NotFoundEntityError
 from sqlalchemy.exc import DataError
 
 
-class EmailResource(Resource):
-    @customer_required()
-    def post(
-        self,
+class EmailService:
+    @staticmethod
+    def send_email(
         customer_id: int,
         address_id: int,
         order_id: int,
     ) -> None:
-        try:
-            customer = EntityServices.get_entity_by_id(CustomerModel, customer_id)
-            address = EntityServices.get_entity_by_id(AddressModel, address_id)
-            order = EntityServices.get_entity_by_id(OrderModel, order_id)
 
-        except NotFoundEntityError as error:
-            return make_response(error.message, HTTPStatus.NOT_FOUND)
-            
+        customer = EntityServices.get_entity_by_id(CustomerModel, customer_id)
+        address = EntityServices.get_entity_by_id(AddressModel, address_id)
+        order: OrderModel = EntityServices.get_entity_by_id(OrderModel, order_id)
+
+        number = address.number
+        complement = address.complement
+        if number == None:
+            number = "sem número"
+
+        if complement == None:
+            complement = "sem complemento"
+
+        list_product = [
+            f"{data.product.name} R$ {data.sold_price} X {data.quantity_product} = {data.sold_price *data.quantity_product} => Total: R$ {order.total_price}"
+            for data in order.orders_products
+        ]
+
         dict_to_request = {
             "personalizations": [
                 {
@@ -40,10 +49,10 @@ class EmailResource(Resource):
                         "order_id": order.id,
                         "total_price": order.total_price,
                         "was_paid": order.was_paid,
-                        "products": "teste",
+                        "products": list_product,
                         "street": address.name,
-                        "number": address.number,
-                        "complement": address.complement,
+                        "number": number,
+                        "complement": complement,
                         "city": address.city,
                         "state": address.state,
                     },
@@ -63,8 +72,3 @@ class EmailResource(Resource):
                 + "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",
             },
         )
-
-        return response.text, response.status_code
-
-
-# NÂO APAGAR   NÂO APAGAR

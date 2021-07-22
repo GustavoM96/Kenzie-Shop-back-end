@@ -11,7 +11,11 @@ from app.views import (
 from app.views import AuthCustomerResource, AuthAdminResource
 from app.views import AdminResource
 from flask import Flask
-from app.views import OrderProductResource, OrderIdProductResource
+from app.views import (
+    OrderProductResource,
+    OrderIdProductResource,
+    OrderProductAddressResource,
+)
 from app.views import EmailResource
 
 
@@ -23,9 +27,16 @@ def init_app(app: Flask) -> None:
         "/customers/<int:customer_id>/addresses/<int:address_id>/orders/<int:order_id>/email",
         endpoint="email",
     )
+    api.add_resource(
+        OrderProductAddressResource,
+        "/customers/<int:customer_id>/addresses/<int:address_id>/orders",
+        endpoint="order_address",
+    )
 
     api.add_resource(
-        OrderProductResource, "/customers/<int:customer_id>/orders", endpoint="order"
+        OrderProductResource,
+        "/customers/<int:customer_id>/orders",
+        endpoint="order",
     )
     api.add_resource(
         OrderIdProductResource,
