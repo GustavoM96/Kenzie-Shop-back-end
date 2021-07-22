@@ -9,7 +9,6 @@ from app.services.auth_service import customer_required
 from app.services.cart_service import CartServices
 from app.services.email_services import EmailService
 
-
 class OrderProductResource(Resource):
     @customer_required()
     def get(self, customer_id: int):
