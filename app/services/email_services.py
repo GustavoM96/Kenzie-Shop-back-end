@@ -24,7 +24,21 @@ class EmailService:
 
         customer = EntityServices.get_entity_by_id(CustomerModel, customer_id)
         address = EntityServices.get_entity_by_id(AddressModel, address_id)
-        order = EntityServices.get_entity_by_id(OrderModel, order_id)
+        order: OrderModel = EntityServices.get_entity_by_id(OrderModel, order_id)
+        print(order.orders_products[0].product.name)
+
+        number = address.number
+        complement = address.complement
+        if number == None:
+            number = "sem número"
+
+        if complement == None:
+            complement = "sem complemento"
+
+        list_product = [
+            f"{data.product.name} R$ {data.sold_price} X {data.quantity_product} = {data.sold_price *data.quantity_product}"
+            for data in order.orders_products
+        ]
 
         dict_to_request = {
             "personalizations": [
@@ -36,10 +50,10 @@ class EmailService:
                         "order_id": order.id,
                         "total_price": order.total_price,
                         "was_paid": order.was_paid,
-                        "products": "teste",
+                        "products": list_product,
                         "street": address.name,
-                        "number": address.number,
-                        "complement": address.complement,
+                        "number": number,
+                        "complement": complement,
                         "city": address.city,
                         "state": address.state,
                     },

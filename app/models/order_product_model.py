@@ -27,5 +27,9 @@ class OrderProductModel(db.Model):
     order_id = Column(Integer, ForeignKey("orders.id"))
     product_id = Column(Integer, ForeignKey("products.id"))
 
-    order = relationship("OrderModel", backref=backref("orders_products"))
-    product = relationship("ProductModel", backref=backref("orders_products"))
+    order = relationship(
+        "OrderModel", backref=backref("orders_products"), uselist=False
+    )
+    product = relationship(
+        "ProductModel", backref=backref("orders_products"), uselist=False
+    )
