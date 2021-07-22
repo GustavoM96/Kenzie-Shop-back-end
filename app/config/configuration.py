@@ -1,8 +1,8 @@
 from flask import Flask
-from environs import Env
 
 from datetime import timedelta
 
+from environs import Env
 env = Env()
 env.read_env()
 
