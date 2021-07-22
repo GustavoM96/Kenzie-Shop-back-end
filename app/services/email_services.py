@@ -4,6 +4,10 @@ from app.models.order_model import OrderModel
 import json
 import requests
 from app.services.entity_services import EntityServices
+from environs import Env
+
+env = Env()
+env.read_env()
 
 
 class EmailService:
