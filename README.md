@@ -31,7 +31,7 @@ Request - 200
 > <p style="font-size:16px;color:#00ff2a"> Retornando o token de acesso do admin </p>
 
 </br>
-<img src="https://i.ibb.co/hHL72Yz/01.png" alt="01" style="width:100%; border:solid 1px green, margin:0 auto;"/>
+<img src="https://i.ibb.co/0K7QFFf/Auth-Admin.png" alt="01" style="width:100%; border:solid 1px green, margin:0 auto;"/>
 
 </br>
 
@@ -55,7 +55,7 @@ Request - 200
 
 </br>
 
-<img src="https://i.ibb.co/VxfBF5M/02.png" style="width:100%; border:solid 1px green, margin:0 auto;"/>
+<img src="https://i.ibb.co/VQ0sqt5/AuthUser.png" style="width:100%; border:solid 1px green, margin:0 auto;"/>
 
 </br>
 
